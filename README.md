@@ -1,4 +1,4 @@
-# Sihaab — landing page
+# Sihaab landing page
 
 Static site for [sihaab.com](https://sihaab.com). No build step: plain HTML/CSS/JS, one page.
 
@@ -6,9 +6,9 @@ Bilingual English/Arabic (header toggle, full RTL via CSS logical properties) wi
 
 ## Files
 
-- `index.html` — the whole site (styles, scripts and both languages' copy inline)
-- `logo.png` — brand mark (transparent)
-- `favicon.png` — small favicon
+- `index.html` - the whole site (styles, scripts and both languages' copy inline)
+- `logo.png` - brand mark (transparent)
+- `favicon.png` - small favicon
 
 ## Push to GitHub
 
@@ -27,7 +27,7 @@ git push -u origin main
 1. Cloudflare dashboard → **Workers & Pages → Create → Pages → Connect to Git**
 2. Select `alilibx/sihaab-site`
 3. Build settings: **Framework preset: None**, build command *empty*, output directory `/`
-4. Deploy — you get `sihaab-site.pages.dev`
+4. Deploy; you get `sihaab-site.pages.dev`
 5. **Custom domains → add `sihaab.com`** (and `www.sihaab.com`). If the domain's DNS is already on Cloudflare, it wires up automatically; otherwise move nameservers first.
 
 Every `git push` to `main` redeploys automatically.
