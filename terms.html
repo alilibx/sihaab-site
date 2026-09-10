@@ -23,6 +23,8 @@
     root.dataset.theme = theme;
     root.lang = lang;
     root.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', theme === 'light' ? '#FAF7F0' : '#0A1128');
   })();
 </script>
 
@@ -31,85 +33,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Kufi+Arabic:wght@500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Kufi+Arabic:wght@500;600&display=swap" rel="stylesheet"></noscript>
 
-<style>
-  :root{--gold:#F2A93B;--radius:14px;--ease:cubic-bezier(.22,.9,.3,1)}
-  :root[data-theme="dark"]{
-    --bg:#0A1128;--bg-raise:#0E1730;--accent:#CADCFC;--text:#F4F7FF;--text-dim:#9FAECF;
-    --line:#26355F;--line-soft:rgba(202,220,252,.08);--glass:rgba(10,17,40,.72);--kicker:var(--gold);
-  }
-  :root[data-theme="light"]{
-    --bg:#FAF7F0;--bg-raise:#FFFFFF;--accent:#2C3E75;--text:#141B36;--text-dim:#5B6584;
-    --line:#E2DCCB;--line-soft:rgba(20,27,54,.08);--glass:rgba(250,247,240,.78);--kicker:#B5750D;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{
-    background:var(--bg);color:var(--text);
-    font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:17px;line-height:1.7;
-    -webkit-font-smoothing:antialiased;
-    transition:background .35s var(--ease),color .35s var(--ease);
-  }
-  ::selection{background:var(--gold);color:#1A1204}
-  html[lang="ar"] body{font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;line-height:1.9}
-  h1,h2{font-family:"Fraunces",serif;font-weight:600;line-height:1.2;letter-spacing:-0.01em}
-  html[lang="ar"] h1,html[lang="ar"] h2{font-family:"Noto Kufi Arabic",sans-serif;letter-spacing:0;line-height:1.5}
-  a{color:var(--accent)}
-  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
-
-  /* language visibility: each block exists in both languages */
-  html[lang="en"] [data-l="ar"]{display:none}
-  html[lang="ar"] [data-l="en"]{display:none}
-
-  header{
-    position:sticky;top:0;z-index:50;background:var(--glass);
-    -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--line-soft);
-  }
-  .nav{display:flex;align-items:center;gap:14px;padding:14px 24px;max-width:1120px;margin:0 auto}
-  .nav img{width:36px;height:36px}
-  .nav .name{font-family:"Fraunces",serif;font-size:1.2rem;font-weight:600;letter-spacing:.04em;color:var(--text);text-decoration:none}
-  html[lang="ar"] .nav .name{font-family:"Noto Kufi Arabic",sans-serif;letter-spacing:0}
-  .nav .controls{margin-inline-start:auto;display:flex;gap:10px}
-  .toggle{
-    display:inline-flex;align-items:center;justify-content:center;gap:6px;
-    height:38px;min-width:38px;padding:0 10px;border-radius:10px;
-    background:transparent;border:1px solid var(--line);color:var(--text);
-    font:inherit;font-size:.88rem;font-weight:600;cursor:pointer;transition:border-color .18s;
-  }
-  .toggle:hover{border-color:var(--accent)}
-  .toggle:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-  .toggle svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-  #theme-toggle .sun{display:none}
-  :root[data-theme="light"] #theme-toggle .sun{display:block}
-  :root[data-theme="light"] #theme-toggle .moon{display:none}
-  #lang-toggle .ar-label{font-family:"Noto Kufi Arabic",sans-serif}
-  html[lang="ar"] #lang-toggle .ar-label{display:none}
-  html[lang="en"] #lang-toggle .en-label{display:none}
-
-  main{padding:64px 0 80px}
-  .kicker{color:var(--kicker);font-weight:600;font-size:.82rem;text-transform:uppercase;letter-spacing:.16em;margin-bottom:12px}
-  html[lang="ar"] .kicker{letter-spacing:0;font-size:.95rem}
-  h1{font-size:clamp(2rem,4.5vw,2.8rem);margin-bottom:10px}
-  .updated{color:var(--text-dim);font-size:.9rem;margin-bottom:40px}
-  h2{font-size:1.35rem;margin:40px 0 12px}
-  p{color:var(--text-dim);margin-bottom:14px;max-width:44rem}
-  ul{margin:0 0 14px;padding-inline-start:22px;color:var(--text-dim);max-width:44rem}
-  li{margin-bottom:8px}
-  strong{color:var(--text)}
-
-  footer{border-top:1px solid var(--line);padding:30px 0;color:var(--text-dim);font-size:.9rem}
-  footer .row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;max-width:1120px;margin:0 auto;padding:0 24px}
-  footer img{width:26px;height:26px}
-  footer nav{margin-inline-start:auto;display:flex;gap:18px}
-</style>
+<link rel="stylesheet" href="legal.css">
 </head>
 <body>
 
 <header>
   <nav class="nav" aria-label="Main">
-    <img src="logo.png" alt="">
+    <img src="logo-96.png" alt="" width="40" height="40">
     <a class="name" href="index.html"><span data-l="en">SIHAAB</span><span data-l="ar">سحاب</span></a>
     <div class="controls">
-      <button id="lang-toggle" class="toggle" type="button">
+      <button id="lang-toggle" class="toggle" type="button" aria-label="Switch language to Arabic">
         <span class="ar-label" lang="ar">عربي</span><span class="en-label" lang="en">EN</span>
       </button>
       <button id="theme-toggle" class="toggle" type="button" aria-label="Toggle dark or light mode">
@@ -123,7 +56,7 @@
 <main>
   <div class="wrap">
 
-    <div data-l="en">
+    <div data-l="en" lang="en" dir="ltr">
       <p class="kicker">Legal</p>
       <h1>Terms of Use</h1>
       <p class="updated">Last updated: September 10, 2026</p>
@@ -135,12 +68,12 @@
       <p>By using this website or joining the waitlist you agree to these terms. If you do not agree, do not use the site.</p>
 
       <h2>3. What this site is</h2>
-      <p>sihaab.com describes a cloud PC service that is being prepared for launch. Product descriptions, plans, prices, and regions shown on the site are indicative and may change before and after launch. Nothing on this site is a binding offer.</p>
+      <p>sihaab.com presents the Sihaab cloud PC service. Product descriptions, plans, prices, and regions shown on the site are indicative and may change. Nothing on this site is a binding offer.</p>
 
       <h2>4. The waitlist</h2>
       <ul>
         <li>Joining the waitlist is free and open to everyone.</li>
-        <li>It does not guarantee access to the service, a launch date, or any specific price.</li>
+        <li>It does not guarantee access to the service or any specific price.</li>
         <li>By joining you allow us to contact you about Sihaab. You can leave the waitlist at any time by emailing us.</li>
       </ul>
 
@@ -166,7 +99,7 @@
       <p>Questions about these terms: <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>.</p>
     </div>
 
-    <div data-l="ar">
+    <div data-l="ar" lang="ar" dir="rtl">
       <p class="kicker">قانوني</p>
       <h1>شروط الاستخدام</h1>
       <p class="updated">آخر تحديث: 10 سبتمبر 2026</p>
@@ -178,12 +111,12 @@
       <p>باستخدامك هذا الموقع أو انضمامك إلى قائمة الانتظار فإنك توافق على هذه الشروط. إذا لم توافق فلا تستخدم الموقع.</p>
 
       <h2>3. ما هو هذا الموقع</h2>
-      <p>يعرض sihaab.com خدمة حاسوب سحابي يجري التحضير لإطلاقها. أوصاف المنتج والخطط والأسعار والمناطق المعروضة في الموقع استرشادية وقد تتغير قبل الإطلاق وبعده. لا يشكل أي محتوى في هذا الموقع عرضاً ملزماً.</p>
+      <p>يقدّم sihaab.com خدمة سحاب للحواسيب السحابية. أوصاف المنتج والخطط والأسعار والمناطق المعروضة في الموقع استرشادية وقد تتغير. لا يشكل أي محتوى في هذا الموقع عرضاً ملزماً.</p>
 
       <h2>4. قائمة الانتظار</h2>
       <ul>
         <li>الانضمام إلى قائمة الانتظار مجاني ومتاح للجميع.</li>
-        <li>لا يضمن الانضمام الوصول إلى الخدمة أو موعد إطلاق أو سعراً محدداً.</li>
+        <li>لا يضمن الانضمام الوصول إلى الخدمة أو سعراً محدداً.</li>
         <li>بانضمامك تسمح لنا بالتواصل معك بشأن سحاب، ويمكنك مغادرة القائمة في أي وقت بمراسلتنا.</li>
       </ul>
 
@@ -214,46 +147,24 @@
 
 <footer>
   <div class="row">
-    <img src="logo.png" alt="">
-    <span data-l="en">© 2026 Sihaab · Dubai, UAE</span>
-    <span data-l="ar">© 2026 سحاب · دبي، الإمارات</span>
-    <nav aria-label="Legal">
+    <img src="logo-96.png" alt="" width="30" height="30">
+    <span data-l="en">© 2026 Sihaab · Dubai, UAE · <a href="mailto:hello@sihaab.com">hello@sihaab.com</a></span>
+    <span data-l="ar">© 2026 سحاب · دبي، الإمارات · <a href="mailto:hello@sihaab.com">hello@sihaab.com</a></span>
+    <nav class="legal" aria-label="Legal">
+      <a href="index.html"><span data-l="en">Home</span><span data-l="ar">الرئيسية</span></a>
       <a href="terms.html"><span data-l="en">Terms</span><span data-l="ar">الشروط</span></a>
       <a href="privacy.html"><span data-l="en">Privacy</span><span data-l="ar">الخصوصية</span></a>
     </nav>
+    <span class="tagline"><span data-l="en">Sihaab · your computer in the cloud</span><span data-l="ar">سحاب · حاسوبك في السحابة</span></span>
   </div>
 </footer>
 
 <script>
-  'use strict';
-  const root = document.documentElement;
-  const themeMeta = document.querySelector('meta[name="theme-color"]');
-  const TITLES = {
-    en: 'Terms of Use · Sihaab',
-    ar: 'شروط الاستخدام · سحاب'
+  window.PAGE = {
+    titles: { en: 'Terms of Use · Sihaab', ar: 'شروط الاستخدام · سحاب' },
+    descs: { en: 'The terms that govern your use of sihaab.com and the Sihaab waitlist.', ar: 'الشروط التي تحكم استخدامك لموقع sihaab.com وقائمة انتظار سحاب.' }
   };
-  const THEME_ARIA = { en: 'Toggle dark or light mode', ar: 'التبديل بين الوضع الداكن والفاتح' };
-
-  function applyLang(lang, persist) {
-    root.lang = lang;
-    root.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    document.title = TITLES[lang];
-    document.getElementById('theme-toggle').setAttribute('aria-label', THEME_ARIA[lang]);
-    if (persist) { try { localStorage.setItem('sihaab-lang', lang); } catch (e) {} }
-  }
-  function applyTheme(theme, persist) {
-    root.dataset.theme = theme;
-    themeMeta.setAttribute('content', getComputedStyle(root).getPropertyValue('--bg').trim());
-    if (persist) { try { localStorage.setItem('sihaab-theme', theme); } catch (e) {} }
-  }
-  applyLang(root.lang === 'ar' ? 'ar' : 'en', false);
-  applyTheme(root.dataset.theme, false);
-  document.getElementById('lang-toggle').addEventListener('click', () => {
-    applyLang(root.lang === 'ar' ? 'en' : 'ar', true);
-  });
-  document.getElementById('theme-toggle').addEventListener('click', () => {
-    applyTheme(root.dataset.theme === 'light' ? 'dark' : 'light', true);
-  });
 </script>
+<script src="legal.js"></script>
 </body>
 </html>
