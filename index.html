@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sihaab — A real computer for everyone. Yours lives in the cloud.</title>
+<meta name="description" content="Subscription Windows & Linux cloud PCs, opened from any browser. Built in MENA, priced for Africa, designed for the world.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --midnight:#0E1730;
+    --panel:#131F42;
+    --panel-2:#182752;
+    --gold:#F2A93B;
+    --gold-deep:#E08A1E;
+    --ice:#CADCFC;
+    --text:#F4F7FF;
+    --text-dim:#9FAECF;
+    --line:#26355F;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--midnight);
+    color:var(--text);
+    font-family:"IBM Plex Sans",system-ui,sans-serif;
+    font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--gold);color:var(--midnight)}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:"Fraunces",serif;font-weight:600;line-height:1.12;letter-spacing:-0.01em}
+  a{color:var(--ice)}
+  .ar{font-family:"IBM Plex Sans Arabic",sans-serif}
+
+  /* ---------- header ---------- */
+  header{padding:22px 0}
+  .nav{display:flex;align-items:center;gap:14px}
+  .nav img{width:44px;height:44px}
+  .nav .name{font-family:"Fraunces",serif;font-size:1.35rem;font-weight:600;letter-spacing:.04em}
+  .nav .name span{color:var(--text-dim);font-family:"IBM Plex Sans Arabic",sans-serif;font-size:1rem;margin-inline-start:10px}
+  .nav .cta{margin-left:auto}
+
+  .btn{
+    display:inline-block;padding:12px 22px;border-radius:10px;
+    font-weight:600;text-decoration:none;font-size:.98rem;
+    border:1px solid transparent;cursor:pointer;
+  }
+  .btn:focus-visible{outline:3px solid var(--ice);outline-offset:2px}
+  .btn-gold{background:var(--gold);color:#1A1204}
+  .btn-gold:hover{background:var(--gold-deep)}
+  .btn-ghost{border-color:var(--line);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--ice)}
+
+  /* ---------- hero ---------- */
+  .hero{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;padding:72px 0 88px}
+  .hero h1{font-size:clamp(2.4rem,5vw,3.6rem);margin-bottom:20px}
+  .hero .sub{color:var(--text-dim);max-width:34rem;margin-bottom:14px}
+  .hero .ar-line{color:var(--ice);font-size:1.15rem;margin-bottom:34px}
+  .hero .actions{display:flex;gap:14px;flex-wrap:wrap}
+
+  /* the one bold element: a live cloud-desktop window */
+  .device{
+    border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--panel);overflow:hidden;
+    box-shadow:0 30px 80px rgba(4,8,22,.55);
+  }
+  .device .bar{
+    display:flex;align-items:center;gap:8px;
+    padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel-2);
+  }
+  .device .dot{width:10px;height:10px;border-radius:50%;background:#3A4A7C}
+  .device .url{
+    margin-left:10px;flex:1;background:var(--midnight);border:1px solid var(--line);
+    border-radius:7px;padding:5px 12px;font-size:.82rem;color:var(--text-dim);
+  }
+  .screen{position:relative;height:330px;background:linear-gradient(150deg,#16244C 0%,#0C1430 70%)}
+  .connect{
+    position:absolute;inset:0;display:flex;flex-direction:column;gap:14px;
+    align-items:center;justify-content:center;background:rgba(12,18,40,.92);
+    transition:opacity .5s ease .9s, visibility .5s ease .9s;
+  }
+  .connect .ring{
+    width:34px;height:34px;border-radius:50%;
+    border:3px solid var(--line);border-top-color:var(--gold);
+    animation:spin 1s linear infinite;
+  }
+  .connect p{font-size:.9rem;color:var(--text-dim)}
+  body.connected .connect{opacity:0;visibility:hidden}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .win{
+    position:absolute;border-radius:9px;background:#1B2A55;border:1px solid #31447E;
+    box-shadow:0 14px 34px rgba(4,8,22,.45);overflow:hidden;font-size:.72rem;
+  }
+  .win .t{padding:6px 10px;background:#22346B;color:var(--ice);font-weight:500}
+  .win pre{padding:10px 12px;color:#9FE3B4;font-family:ui-monospace,monospace;line-height:1.7;font-size:.72rem}
+  .win.sheet{left:8%;top:14%;width:46%}
+  .win.sheet .cells{display:grid;grid-template-columns:repeat(4,1fr)}
+  .win.sheet .cells i{height:20px;border:.5px solid #2C3E75;font-style:normal}
+  .win.sheet .cells i.g{background:rgba(242,169,59,.28)}
+  .win.term{right:7%;top:32%;width:44%}
+  .taskbar{
+    position:absolute;left:0;right:0;bottom:0;height:38px;background:rgba(10,16,36,.85);
+    border-top:1px solid var(--line);display:flex;align-items:center;gap:10px;padding:0 14px;
+  }
+  .taskbar b{width:20px;height:20px;border-radius:5px;background:var(--panel-2);border:1px solid var(--line)}
+  .latency{
+    margin-left:auto;font-size:.75rem;color:var(--ice);
+    background:rgba(202,220,252,.1);border:1px solid var(--line);
+    border-radius:20px;padding:3px 12px;
+  }
+  .latency em{color:var(--gold);font-style:normal;font-weight:600}
+
+  /* ---------- sections ---------- */
+  section{padding:76px 0;border-top:1px solid var(--line)}
+  .kicker{color:var(--gold);font-weight:600;font-size:.95rem;margin-bottom:10px}
+  section h2{font-size:clamp(1.7rem,3.4vw,2.4rem);margin-bottom:16px;max-width:36rem}
+  .lede{color:var(--text-dim);max-width:38rem;margin-bottom:44px}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;counter-reset:step}
+  .step{counter-increment:step;border-top:2px solid var(--gold);padding-top:18px}
+  .step::before{
+    content:counter(step);display:block;
+    font-family:"Fraunces",serif;font-size:1.6rem;color:var(--gold);margin-bottom:8px;
+  }
+  .step h3{font-size:1.15rem;margin-bottom:8px}
+  .step p{color:var(--text-dim);font-size:.95rem}
+
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+  .tier{padding:30px 28px;border-radius:var(--radius);display:flex;flex-direction:column}
+  .tier.side{border:1px solid var(--line)}
+  .tier.main{background:var(--panel);border:1px solid var(--gold)}
+  .tier h3{font-size:1.2rem;margin-bottom:4px}
+  .tier .price{font-family:"Fraunces",serif;font-size:2rem;color:var(--gold);margin:10px 0 4px}
+  .tier .per{color:var(--text-dim);font-size:.85rem;margin-bottom:18px}
+  .tier ul{list-style:none;display:grid;gap:10px;margin-bottom:24px}
+  .tier li{padding-left:22px;position:relative;font-size:.95rem;color:var(--text-dim)}
+  .tier li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;border-radius:50%;background:var(--gold)}
+  .tier .btn{margin-top:auto;text-align:center}
+  .edu{
+    margin-top:26px;padding:22px 26px;border-radius:var(--radius);
+    background:rgba(202,220,252,.07);border:1px solid var(--line);color:var(--text-dim);font-size:.98rem;
+  }
+  .edu strong{color:var(--text)}
+
+  .regions{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+  .chip{
+    border:1px solid var(--line);border-radius:24px;padding:8px 18px;font-size:.92rem;color:var(--ice);
+  }
+  .chip em{color:var(--gold);font-style:normal;font-weight:600;margin-left:6px}
+  .mission{margin-top:36px;max-width:44rem;font-family:"Fraunces",serif;font-size:1.35rem;line-height:1.5;color:var(--text)}
+  .mission .ar{display:block;margin-top:14px;color:var(--ice);font-size:1.1rem}
+
+  .waitlist form{display:flex;gap:12px;max-width:34rem;flex-wrap:wrap}
+  .waitlist input{
+    flex:1;min-width:230px;padding:13px 16px;border-radius:10px;font-size:1rem;
+    background:var(--panel);border:1px solid var(--line);color:var(--text);
+  }
+  .waitlist input:focus-visible{outline:3px solid var(--ice);outline-offset:1px}
+  .waitlist .note{color:var(--text-dim);font-size:.9rem;margin-top:14px}
+
+  footer{border-top:1px solid var(--line);padding:34px 0;display:flex;align-items:center;gap:16px;color:var(--text-dim);font-size:.9rem}
+  footer img{width:30px;height:30px}
+  footer .ar{margin-left:auto;color:var(--ice)}
+
+  @media (max-width:880px){
+    .hero{grid-template-columns:1fr;padding:44px 0 64px}
+    .steps,.tiers{grid-template-columns:1fr}
+    .nav .cta{display:none}
+    footer{flex-wrap:wrap}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .connect{display:none}
+    .connect .ring{animation:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <nav class="nav">
+    <img src="logo.png" alt="Sihaab logo — a cloud made of circuit lines">
+    <div class="name">SIHAAB<span class="ar">سحاب</span></div>
+    <a class="btn btn-gold cta" href="#waitlist">Join the waitlist</a>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div>
+      <h1>A real computer for everyone. Yours lives in the cloud.</h1>
+      <p class="sub">Sihaab gives you a full Windows or Linux machine running in a data center near you — opened from any browser, on any device. Old laptop, shared PC, basic tablet: all of them become a modern workstation.</p>
+      <p class="ar-line ar">حاسوب حقيقي للجميع — يعيش في السحابة.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="#waitlist">Join the waitlist</a>
+        <a class="btn btn-ghost" href="#machines">See the machines</a>
+      </div>
+    </div>
+
+    <div class="device" aria-label="Illustration: a cloud desktop streaming inside a browser window">
+      <div class="bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="url">pc.sihaab.com/your-machine</span>
+      </div>
+      <div class="screen">
+        <div class="win sheet">
+          <div class="t">Budget — Q4.xlsx</div>
+          <div class="cells" aria-hidden="true">
+            <i></i><i class="g"></i><i></i><i></i>
+            <i></i><i></i><i class="g"></i><i></i>
+            <i class="g"></i><i></i><i></i><i></i>
+          </div>
+        </div>
+        <div class="win term">
+          <div class="t">terminal — ubuntu</div>
+          <pre>$ python train.py
+epoch 3/10  loss 0.214
+gpu: A10G · 24 GB</pre>
+        </div>
+        <div class="taskbar">
+          <b></b><b></b><b></b>
+          <span class="latency">Connected · <em>38 ms</em> · Dubai</span>
+        </div>
+        <div class="connect">
+          <div class="ring" aria-hidden="true"></div>
+          <p>Connecting to your machine…</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="how">
+    <div class="wrap">
+      <p class="kicker">How it works</p>
+      <h2>Three steps between you and a machine that never breaks</h2>
+      <div class="steps">
+        <div class="step">
+          <h3>Pick your machine</h3>
+          <p>Windows or Linux, sized for what you do — from writing essays to training models on a rented GPU.</p>
+        </div>
+        <div class="step">
+          <h3>Open your browser</h3>
+          <p>Sign in from anything with a screen and internet. Nothing to install, nothing stored on the device.</p>
+        </div>
+        <div class="step">
+          <h3>Work from anywhere</h3>
+          <p>Your files, apps and desktop are exactly where you left them — on any device, in any city. Lose the device, keep the computer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="machines">
+    <div class="wrap">
+      <p class="kicker">Machines</p>
+      <h2>One subscription. The whole computer problem, solved.</h2>
+      <p class="lede">Every plan is fully managed: provisioning, security, patching and backups are handled for you. No IT department required.</p>
+      <div class="tiers">
+        <div class="tier side">
+          <h3>Access</h3>
+          <p class="price">from $15</p>
+          <p class="per">per user / month</p>
+          <ul>
+            <li>Bring any device — browser only</li>
+            <li>Windows &amp; Linux desktops</li>
+            <li>For people who own a device, just not a capable one</li>
+          </ul>
+          <a class="btn btn-ghost" href="#waitlist">Join the waitlist</a>
+        </div>
+        <div class="tier main">
+          <h3>Complete</h3>
+          <p class="price">from $35</p>
+          <p class="per">per user / month</p>
+          <ul>
+            <li>Thin laptop included in the plan</li>
+            <li>Breaks? Swapped in 24 hours — files, apps and settings intact</li>
+            <li>Zero IT overhead for schools and companies</li>
+          </ul>
+          <a class="btn btn-gold" href="#waitlist">Join the waitlist</a>
+        </div>
+        <div class="tier side">
+          <h3>Sovereign</h3>
+          <p class="price">Custom</p>
+          <p class="per">annual contract</p>
+          <ul>
+            <li>On-premises or private-cloud deployment</li>
+            <li>Data residency, audit and compliance</li>
+            <li>Governments, banks and large universities</li>
+          </ul>
+          <a class="btn btn-ghost" href="mailto:hello@sihaab.com?subject=Sovereign%20deployment">Talk to us</a>
+        </div>
+      </div>
+      <p class="edu"><strong>Built for education:</strong> spin up 40 identical GPU machines for a deep-learning course and retire them after finals. Exam lock-down mode, central software licensing, and metered AI access for every student.</p>
+    </div>
+  </section>
+
+  <section id="regions">
+    <div class="wrap">
+      <p class="kicker">Regions</p>
+      <h2>Your machine runs close to you</h2>
+      <p class="lede">Desktops are hosted in-country or in-region, so they feel local — and your data stays where the law expects it.</p>
+      <div class="regions">
+        <span class="chip">Dubai <em>live first</em></span>
+        <span class="chip">Riyadh <em>2027</em></span>
+        <span class="chip">Johannesburg <em>2027</em></span>
+        <span class="chip">Nairobi <em>2027</em></span>
+        <span class="chip">Lagos <em>planned</em></span>
+      </div>
+      <p class="mission">Where a capable laptop costs months of income, we remove the device from the equation. Any shared PC, school lab or basic tablet becomes a modern workstation — because the computer lives in a data center on the continent.
+        <span class="ar">حيث تكون أجهزة الحاسوب بعيدة المنال، نجعل الحوسبة في متناول الجميع.</span>
+      </p>
+    </div>
+  </section>
+
+  <section id="waitlist" class="waitlist">
+    <div class="wrap">
+      <p class="kicker">Early access</p>
+      <h2>Be first in line</h2>
+      <p class="lede">We're onboarding universities, schools and companies in the GCC first, then Africa. Tell us who you are and we'll reach out.</p>
+      <form id="wl-form">
+        <input type="email" id="wl-email" name="email" placeholder="you@university.edu" required aria-label="Your email address">
+        <button class="btn btn-gold" type="submit">Join the waitlist</button>
+      </form>
+      <p class="note">This opens an email to <a href="mailto:hello@sihaab.com">hello@sihaab.com</a> — no forms, no tracking, a person reads it.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex;align-items:center;gap:16px;width:100%">
+    <img src="logo.png" alt="">
+    <span>© 2026 Sihaab · Dubai, UAE · <a href="mailto:hello@sihaab.com">hello@sihaab.com</a></span>
+    <span class="ar">سحاب — حاسوبك في السحابة</span>
+  </div>
+</footer>
+
+<script>
+  // one orchestrated moment: the desktop "connects" on load
+  addEventListener('load', () => document.body.classList.add('connected'));
+
+  // waitlist: compose an email (static site, no backend)
+  document.getElementById('wl-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('wl-email').value;
+    location.href = 'mailto:hello@sihaab.com?subject=' +
+      encodeURIComponent('Waitlist — Sihaab') +
+      '&body=' + encodeURIComponent('Please add me to the waitlist.\nMy email: ' + email + '\nI am a: (student / university / school / company)');
+  });
+</script>
+</body>
+</html>
