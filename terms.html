@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Use · Sihaab</title>
+<meta name="description" content="The terms that govern your use of sihaab.com and the Sihaab waitlist.">
+<meta name="theme-color" content="#0A1128">
+<link rel="icon" type="image/png" href="favicon.png">
+
+<script>
+  // Before first paint: restore saved theme + language (or fall back to system / English).
+  (function () {
+    var root = document.documentElement, theme, lang;
+    try {
+      theme = localStorage.getItem('sihaab-theme');
+      lang = localStorage.getItem('sihaab-lang');
+    } catch (e) { /* storage blocked */ }
+    if (theme !== 'light' && theme !== 'dark') {
+      theme = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+    if (lang !== 'ar' && lang !== 'en') lang = 'en';
+    root.dataset.theme = theme;
+    root.lang = lang;
+    root.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Kufi+Arabic:wght@500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Kufi+Arabic:wght@500;600&display=swap" rel="stylesheet"></noscript>
+
+<style>
+  :root{--gold:#F2A93B;--radius:14px;--ease:cubic-bezier(.22,.9,.3,1)}
+  :root[data-theme="dark"]{
+    --bg:#0A1128;--bg-raise:#0E1730;--accent:#CADCFC;--text:#F4F7FF;--text-dim:#9FAECF;
+    --line:#26355F;--line-soft:rgba(202,220,252,.08);--glass:rgba(10,17,40,.72);--kicker:var(--gold);
+  }
+  :root[data-theme="light"]{
+    --bg:#FAF7F0;--bg-raise:#FFFFFF;--accent:#2C3E75;--text:#141B36;--text-dim:#5B6584;
+    --line:#E2DCCB;--line-soft:rgba(20,27,54,.08);--glass:rgba(250,247,240,.78);--kicker:#B5750D;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);color:var(--text);
+    font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:17px;line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    transition:background .35s var(--ease),color .35s var(--ease);
+  }
+  ::selection{background:var(--gold);color:#1A1204}
+  html[lang="ar"] body{font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;line-height:1.9}
+  h1,h2{font-family:"Fraunces",serif;font-weight:600;line-height:1.2;letter-spacing:-0.01em}
+  html[lang="ar"] h1,html[lang="ar"] h2{font-family:"Noto Kufi Arabic",sans-serif;letter-spacing:0;line-height:1.5}
+  a{color:var(--accent)}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
+
+  /* language visibility: each block exists in both languages */
+  html[lang="en"] [data-l="ar"]{display:none}
+  html[lang="ar"] [data-l="en"]{display:none}
+
+  header{
+    position:sticky;top:0;z-index:50;background:var(--glass);
+    -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav{display:flex;align-items:center;gap:14px;padding:14px 24px;max-width:1120px;margin:0 auto}
+  .nav img{width:36px;height:36px}
+  .nav .name{font-family:"Fraunces",serif;font-size:1.2rem;font-weight:600;letter-spacing:.04em;color:var(--text);text-decoration:none}
+  html[lang="ar"] .nav .name{font-family:"Noto Kufi Arabic",sans-serif;letter-spacing:0}
+  .nav .controls{margin-inline-start:auto;display:flex;gap:10px}
+  .toggle{
+    display:inline-flex;align-items:center;justify-content:center;gap:6px;
+    height:38px;min-width:38px;padding:0 10px;border-radius:10px;
+    background:transparent;border:1px solid var(--line);color:var(--text);
+    font:inherit;font-size:.88rem;font-weight:600;cursor:pointer;transition:border-color .18s;
+  }
+  .toggle:hover{border-color:var(--accent)}
+  .toggle:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  .toggle svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  #theme-toggle .sun{display:none}
+  :root[data-theme="light"] #theme-toggle .sun{display:block}
+  :root[data-theme="light"] #theme-toggle .moon{display:none}
+  #lang-toggle .ar-label{font-family:"Noto Kufi Arabic",sans-serif}
+  html[lang="ar"] #lang-toggle .ar-label{display:none}
+  html[lang="en"] #lang-toggle .en-label{display:none}
+
+  main{padding:64px 0 80px}
+  .kicker{color:var(--kicker);font-weight:600;font-size:.82rem;text-transform:uppercase;letter-spacing:.16em;margin-bottom:12px}
+  html[lang="ar"] .kicker{letter-spacing:0;font-size:.95rem}
+  h1{font-size:clamp(2rem,4.5vw,2.8rem);margin-bottom:10px}
+  .updated{color:var(--text-dim);font-size:.9rem;margin-bottom:40px}
+  h2{font-size:1.35rem;margin:40px 0 12px}
+  p{color:var(--text-dim);margin-bottom:14px;max-width:44rem}
+  ul{margin:0 0 14px;padding-inline-start:22px;color:var(--text-dim);max-width:44rem}
+  li{margin-bottom:8px}
+  strong{color:var(--text)}
+
+  footer{border-top:1px solid var(--line);padding:30px 0;color:var(--text-dim);font-size:.9rem}
+  footer .row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;max-width:1120px;margin:0 auto;padding:0 24px}
+  footer img{width:26px;height:26px}
+  footer nav{margin-inline-start:auto;display:flex;gap:18px}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav" aria-label="Main">
+    <img src="logo.png" alt="">
+    <a class="name" href="index.html"><span data-l="en">SIHAAB</span><span data-l="ar">سحاب</span></a>
+    <div class="controls">
+      <button id="lang-toggle" class="toggle" type="button">
+        <span class="ar-label" lang="ar">عربي</span><span class="en-label" lang="en">EN</span>
+      </button>
+      <button id="theme-toggle" class="toggle" type="button" aria-label="Toggle dark or light mode">
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <div data-l="en">
+      <p class="kicker">Legal</p>
+      <h1>Terms of Use</h1>
+      <p class="updated">Last updated: September 10, 2026</p>
+
+      <h2>1. Who we are</h2>
+      <p>Sihaab ("we", "us") operates sihaab.com from Dubai, United Arab Emirates. Contact: <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>.</p>
+
+      <h2>2. Agreement</h2>
+      <p>By using this website or joining the waitlist you agree to these terms. If you do not agree, do not use the site.</p>
+
+      <h2>3. What this site is</h2>
+      <p>sihaab.com describes a cloud PC service that is being prepared for launch. Product descriptions, plans, prices, and regions shown on the site are indicative and may change before and after launch. Nothing on this site is a binding offer.</p>
+
+      <h2>4. The waitlist</h2>
+      <ul>
+        <li>Joining the waitlist is free and open to everyone.</li>
+        <li>It does not guarantee access to the service, a launch date, or any specific price.</li>
+        <li>By joining you allow us to contact you about Sihaab. You can leave the waitlist at any time by emailing us.</li>
+      </ul>
+
+      <h2>5. Intellectual property</h2>
+      <p>The Sihaab name, logo, and all content on this site belong to us or our licensors. You may not copy, modify, or reuse them without our written permission, except as allowed by law.</p>
+
+      <h2>6. Acceptable use</h2>
+      <p>Do not misuse the site: no attempts to disrupt it, probe it for vulnerabilities without permission, scrape it at abusive rates, or use it for anything unlawful.</p>
+
+      <h2>7. Disclaimers</h2>
+      <p>The site is provided "as is" and "as available". To the extent the law allows, we make no warranties about its availability, accuracy, or fitness for a particular purpose.</p>
+
+      <h2>8. Limitation of liability</h2>
+      <p>To the extent permitted by law, we are not liable for indirect or consequential losses arising from your use of this site. Nothing in these terms excludes liability that cannot be excluded under applicable law.</p>
+
+      <h2>9. Changes</h2>
+      <p>We may update these terms. The date at the top reflects the latest version. Continued use of the site after a change means you accept the updated terms.</p>
+
+      <h2>10. Governing law</h2>
+      <p>These terms are governed by the laws of the United Arab Emirates as applied in the Emirate of Dubai, and the courts of Dubai have jurisdiction over any dispute.</p>
+
+      <h2>11. Contact</h2>
+      <p>Questions about these terms: <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>.</p>
+    </div>
+
+    <div data-l="ar">
+      <p class="kicker">قانوني</p>
+      <h1>شروط الاستخدام</h1>
+      <p class="updated">آخر تحديث: 10 سبتمبر 2026</p>
+
+      <h2>1. من نحن</h2>
+      <p>تدير سحاب ("نحن") موقع sihaab.com من دبي، الإمارات العربية المتحدة. للتواصل: <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>.</p>
+
+      <h2>2. الاتفاق</h2>
+      <p>باستخدامك هذا الموقع أو انضمامك إلى قائمة الانتظار فإنك توافق على هذه الشروط. إذا لم توافق فلا تستخدم الموقع.</p>
+
+      <h2>3. ما هو هذا الموقع</h2>
+      <p>يعرض sihaab.com خدمة حاسوب سحابي يجري التحضير لإطلاقها. أوصاف المنتج والخطط والأسعار والمناطق المعروضة في الموقع استرشادية وقد تتغير قبل الإطلاق وبعده. لا يشكل أي محتوى في هذا الموقع عرضاً ملزماً.</p>
+
+      <h2>4. قائمة الانتظار</h2>
+      <ul>
+        <li>الانضمام إلى قائمة الانتظار مجاني ومتاح للجميع.</li>
+        <li>لا يضمن الانضمام الوصول إلى الخدمة أو موعد إطلاق أو سعراً محدداً.</li>
+        <li>بانضمامك تسمح لنا بالتواصل معك بشأن سحاب، ويمكنك مغادرة القائمة في أي وقت بمراسلتنا.</li>
+      </ul>
+
+      <h2>5. الملكية الفكرية</h2>
+      <p>اسم سحاب وشعاره وكل محتوى هذا الموقع ملك لنا أو لمرخّصينا. لا يجوز نسخها أو تعديلها أو إعادة استخدامها دون إذن كتابي منا، إلا بما يسمح به القانون.</p>
+
+      <h2>6. الاستخدام المقبول</h2>
+      <p>لا تسئ استخدام الموقع: لا محاولات لتعطيله، ولا فحص لثغراته دون إذن، ولا كشط لمحتواه بمعدلات مسيئة، ولا استخدامه في أي أمر غير مشروع.</p>
+
+      <h2>7. إخلاء المسؤولية</h2>
+      <p>يُقدَّم الموقع "كما هو" و"كما هو متاح". وإلى الحد الذي يسمح به القانون، لا نقدم أي ضمانات بشأن توفره أو دقته أو ملاءمته لغرض معين.</p>
+
+      <h2>8. حدود المسؤولية</h2>
+      <p>إلى الحد الذي يسمح به القانون، لسنا مسؤولين عن الخسائر غير المباشرة أو التبعية الناشئة عن استخدامك هذا الموقع. ولا يستبعد أي بند في هذه الشروط مسؤولية لا يجيز القانون المعمول به استبعادها.</p>
+
+      <h2>9. التغييرات</h2>
+      <p>قد نحدّث هذه الشروط. التاريخ في الأعلى يعكس أحدث نسخة، واستمرارك في استخدام الموقع بعد أي تغيير يعني قبولك الشروط المحدّثة.</p>
+
+      <h2>10. القانون الواجب التطبيق</h2>
+      <p>تخضع هذه الشروط لقوانين دولة الإمارات العربية المتحدة كما تُطبَّق في إمارة دبي، ولمحاكم دبي الاختصاص في أي نزاع.</p>
+
+      <h2>11. التواصل</h2>
+      <p>للأسئلة حول هذه الشروط: <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="row">
+    <img src="logo.png" alt="">
+    <span data-l="en">© 2026 Sihaab · Dubai, UAE</span>
+    <span data-l="ar">© 2026 سحاب · دبي، الإمارات</span>
+    <nav aria-label="Legal">
+      <a href="terms.html"><span data-l="en">Terms</span><span data-l="ar">الشروط</span></a>
+      <a href="privacy.html"><span data-l="en">Privacy</span><span data-l="ar">الخصوصية</span></a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  'use strict';
+  const root = document.documentElement;
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  const TITLES = {
+    en: 'Terms of Use · Sihaab',
+    ar: 'شروط الاستخدام · سحاب'
+  };
+  const THEME_ARIA = { en: 'Toggle dark or light mode', ar: 'التبديل بين الوضع الداكن والفاتح' };
+
+  function applyLang(lang, persist) {
+    root.lang = lang;
+    root.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.title = TITLES[lang];
+    document.getElementById('theme-toggle').setAttribute('aria-label', THEME_ARIA[lang]);
+    if (persist) { try { localStorage.setItem('sihaab-lang', lang); } catch (e) {} }
+  }
+  function applyTheme(theme, persist) {
+    root.dataset.theme = theme;
+    themeMeta.setAttribute('content', getComputedStyle(root).getPropertyValue('--bg').trim());
+    if (persist) { try { localStorage.setItem('sihaab-theme', theme); } catch (e) {} }
+  }
+  applyLang(root.lang === 'ar' ? 'ar' : 'en', false);
+  applyTheme(root.dataset.theme, false);
+  document.getElementById('lang-toggle').addEventListener('click', () => {
+    applyLang(root.lang === 'ar' ? 'en' : 'ar', true);
+  });
+  document.getElementById('theme-toggle').addEventListener('click', () => {
+    applyTheme(root.dataset.theme === 'light' ? 'dark' : 'light', true);
+  });
+</script>
+</body>
+</html>

@@ -330,6 +330,7 @@
   footer{border-top:1px solid var(--line);padding:34px 0;color:var(--text-dim);font-size:.9rem}
   footer .row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
   footer img{width:30px;height:30px}
+  footer .legal{display:flex;gap:16px}
   footer .tagline{margin-inline-start:auto;color:var(--accent)}
 
   @media (max-width:880px){
@@ -516,6 +517,10 @@ gpu: A10G · 24 GB</span><span class="caret"></span></pre>
   <div class="wrap row">
     <img src="logo.png" alt="">
     <span data-i18n-html="footerLine">© 2026 Sihaab · Dubai, UAE · <a href="mailto:hello@sihaab.com">hello@sihaab.com</a></span>
+    <nav class="legal" aria-label="Legal">
+      <a href="terms.html" data-i18n="footerTerms">Terms</a>
+      <a href="privacy.html" data-i18n="footerPrivacy">Privacy</a>
+    </nav>
     <span class="tagline" data-i18n="footerTagline">Sihaab · your computer in the cloud</span>
   </div>
 </footer>
@@ -647,6 +652,8 @@ gpu: A10G · 24 GB</span><span class="caret"></span></pre>
       en: '© 2026 Sihaab · Dubai, UAE · <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>',
       ar: '© 2026 سحاب · دبي، الإمارات · <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>'
     },
+    footerTerms: { en: 'Terms', ar: 'الشروط' },
+    footerPrivacy: { en: 'Privacy', ar: 'الخصوصية' },
     footerTagline: { en: 'Sihaab · your computer in the cloud', ar: 'سحاب · حاسوبك في السحابة' }
   };
 
