@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy · Sihaab</title>
+<meta name="description" content="How Sihaab collects, uses and protects your personal data.">
+<meta name="theme-color" content="#0A1128">
+<link rel="icon" type="image/png" href="favicon.png">
+
+<script>
+  // Before first paint: restore saved theme + language (or fall back to system / English).
+  (function () {
+    var root = document.documentElement, theme, lang;
+    try {
+      theme = localStorage.getItem('sihaab-theme');
+      lang = localStorage.getItem('sihaab-lang');
+    } catch (e) { /* storage blocked */ }
+    if (theme !== 'light' && theme !== 'dark') {
+      theme = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+    if (lang !== 'ar' && lang !== 'en') lang = 'en';
+    root.dataset.theme = theme;
+    root.lang = lang;
+    root.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', theme === 'light' ? '#FAF7F0' : '#0A1128');
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Kufi+Arabic:wght@500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Kufi+Arabic:wght@500;600&display=swap" rel="stylesheet"></noscript>
+
+<link rel="stylesheet" href="legal.css">
+</head>
+<body>
+
+<header>
+  <nav class="nav" aria-label="Main">
+    <img src="logo-96.png" alt="" width="40" height="40">
+    <a class="name" href="index.html"><span data-l="en">SIHAAB</span><span data-l="ar">سحاب</span></a>
+    <div class="controls">
+      <button id="lang-toggle" class="toggle" type="button" aria-label="Switch language to Arabic">
+        <span class="ar-label" lang="ar">عربي</span><span class="en-label" lang="en">EN</span>
+      </button>
+      <button id="theme-toggle" class="toggle" type="button" aria-label="Toggle dark or light mode">
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <div data-l="en" lang="en" dir="ltr">
+      <p class="kicker">Legal</p>
+      <h1>Privacy Policy</h1>
+      <p class="updated">Last updated: September 10, 2026</p>
+
+      <h2>1. Who we are</h2>
+      <p>Sihaab ("we", "us") operates sihaab.com from Dubai, United Arab Emirates. We are the data controller for the personal data described in this policy. You can reach us at <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>.</p>
+
+      <h2>2. What we collect</h2>
+      <p>This website is a marketing site. The only personal data we receive is what you choose to send us:</p>
+      <ul>
+        <li><strong>Your email address and message</strong>, when you use the waitlist form or email us. The form opens your own email app; nothing is submitted to our servers in the background.</li>
+      </ul>
+      <p>We do not run user accounts or payment processing through this website. If that changes, we will update this policy first.</p>
+
+      <h2>3. What we do not collect</h2>
+      <ul>
+        <li>No cookies.</li>
+        <li>No analytics, advertising pixels, or tracking scripts.</li>
+        <li>Your language and theme preferences are stored only in your browser's local storage. They never leave your device.</li>
+      </ul>
+      <p>One technical exception: this site loads its fonts from Google Fonts. Your browser requests them directly from Google, which receives your IP address and browser details in that request. We plan to self-host the fonts to remove this.</p>
+
+      <h2>4. Why we process your data</h2>
+      <p>We use your email address to respond to you and to contact you about Sihaab, including waitlist updates. The legal basis is your consent, which you give by contacting us. You can withdraw it at any time by emailing us.</p>
+
+      <h2>5. Sharing</h2>
+      <p>We do not sell or rent personal data. Emails you send us are processed by our email hosting provider as a service provider on our behalf. We may disclose data if the law requires it.</p>
+
+      <h2>6. Retention</h2>
+      <p>We keep waitlist emails until you ask us to remove you, or until they are no longer needed for launch communication, whichever comes first.</p>
+
+      <h2>7. Your rights</h2>
+      <p>Under the UAE Personal Data Protection Law (Federal Decree-Law No. 45 of 2021) you may request access to, correction of, or deletion of your personal data, and you may withdraw consent. Email <a href="mailto:hello@sihaab.com">hello@sihaab.com</a> and we will act on your request.</p>
+
+      <h2>8. International transfers</h2>
+      <p>Emails may be stored or processed in the countries where our email provider operates, and font requests are served by Google as described above. We choose providers that apply appropriate safeguards.</p>
+
+      <h2>9. Children</h2>
+      <p>This site is not directed at children. If you believe a child has sent us personal data, contact us and we will delete it.</p>
+
+      <h2>10. Changes</h2>
+      <p>We may update this policy as the product evolves. The date at the top reflects the latest version.</p>
+
+      <h2>11. Contact</h2>
+      <p>Questions about this policy: <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>.</p>
+    </div>
+
+    <div data-l="ar" lang="ar" dir="rtl">
+      <p class="kicker">قانوني</p>
+      <h1>سياسة الخصوصية</h1>
+      <p class="updated">آخر تحديث: 10 سبتمبر 2026</p>
+
+      <h2>1. من نحن</h2>
+      <p>تدير سحاب ("نحن") موقع sihaab.com من دبي، الإمارات العربية المتحدة. نحن المتحكم في البيانات الشخصية الموضحة في هذه السياسة. يمكنك التواصل معنا عبر <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>.</p>
+
+      <h2>2. ما الذي نجمعه</h2>
+      <p>هذا الموقع تعريفي. البيانات الشخصية الوحيدة التي نتلقاها هي ما تختار إرساله إلينا:</p>
+      <ul>
+        <li><strong>بريدك الإلكتروني ورسالتك</strong>، عند استخدام نموذج قائمة الانتظار أو مراسلتنا. النموذج يفتح تطبيق البريد الخاص بك، ولا يُرسل أي شيء إلى خوادمنا في الخلفية.</li>
+      </ul>
+      <p>لا ندير عبر هذا الموقع حسابات مستخدمين أو مدفوعات. وإذا تغيّر ذلك فسنحدّث هذه السياسة أولاً.</p>
+
+      <h2>3. ما الذي لا نجمعه</h2>
+      <ul>
+        <li>لا ملفات تعريف ارتباط (كوكيز).</li>
+        <li>لا تحليلات ولا بكسلات إعلانية ولا نصوص تتبع.</li>
+        <li>تفضيلات اللغة والمظهر تُخزَّن في متصفحك فقط، ولا تغادر جهازك أبداً.</li>
+      </ul>
+      <p>استثناء تقني واحد: يحمّل هذا الموقع خطوطه من خدمة Google Fonts، إذ يطلبها متصفحك مباشرة من Google التي تتلقى عنوان IP الخاص بك وبيانات متصفحك ضمن ذلك الطلب. نخطط لاستضافة الخطوط ذاتياً لإزالة هذا الاستثناء.</p>
+
+      <h2>4. لماذا نعالج بياناتك</h2>
+      <p>نستخدم بريدك الإلكتروني للرد عليك وللتواصل معك بشأن سحاب، بما في ذلك تحديثات قائمة الانتظار. الأساس القانوني هو موافقتك التي تمنحها بتواصلك معنا، ويمكنك سحبها في أي وقت بمراسلتنا.</p>
+
+      <h2>5. المشاركة</h2>
+      <p>لا نبيع البيانات الشخصية ولا نؤجرها. الرسائل التي ترسلها إلينا يعالجها مزوّد استضافة البريد لدينا بصفته مزوّد خدمة يعمل نيابة عنا. وقد نفصح عن البيانات إذا ألزمنا القانون بذلك.</p>
+
+      <h2>6. الاحتفاظ بالبيانات</h2>
+      <p>نحتفظ برسائل قائمة الانتظار حتى تطلب إزالتك، أو حتى تنتفي الحاجة إليها للتواصل بشأن الإطلاق، أيهما أسبق.</p>
+
+      <h2>7. حقوقك</h2>
+      <p>بموجب قانون حماية البيانات الشخصية الإماراتي (المرسوم بقانون اتحادي رقم 45 لسنة 2021) يحق لك طلب الوصول إلى بياناتك الشخصية أو تصحيحها أو حذفها، ويحق لك سحب موافقتك. راسلنا على <a href="mailto:hello@sihaab.com">hello@sihaab.com</a> وسننفذ طلبك.</p>
+
+      <h2>8. النقل الدولي للبيانات</h2>
+      <p>قد تُخزَّن الرسائل أو تُعالَج في الدول التي يعمل فيها مزوّد البريد لدينا، وتُقدَّم طلبات الخطوط عبر Google كما هو موضح أعلاه. نختار مزوّدين يطبقون ضمانات مناسبة.</p>
+
+      <h2>9. الأطفال</h2>
+      <p>هذا الموقع غير موجّه للأطفال. إذا كنت تعتقد أن طفلاً أرسل إلينا بيانات شخصية فتواصل معنا وسنحذفها.</p>
+
+      <h2>10. التغييرات</h2>
+      <p>قد نحدّث هذه السياسة مع تطور المنتج. التاريخ في الأعلى يعكس أحدث نسخة.</p>
+
+      <h2>11. التواصل</h2>
+      <p>للأسئلة حول هذه السياسة: <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="row">
+    <img src="logo-96.png" alt="" width="30" height="30">
+    <span data-l="en">© 2026 Sihaab · Dubai, UAE · <a href="mailto:hello@sihaab.com">hello@sihaab.com</a></span>
+    <span data-l="ar">© 2026 سحاب · دبي، الإمارات · <a href="mailto:hello@sihaab.com">hello@sihaab.com</a></span>
+    <nav class="legal" aria-label="Legal">
+      <a href="index.html"><span data-l="en">Home</span><span data-l="ar">الرئيسية</span></a>
+      <a href="terms.html"><span data-l="en">Terms</span><span data-l="ar">الشروط</span></a>
+      <a href="privacy.html"><span data-l="en">Privacy</span><span data-l="ar">الخصوصية</span></a>
+    </nav>
+    <span class="tagline"><span data-l="en">Sihaab · your computer in the cloud</span><span data-l="ar">سحاب · حاسوبك في السحابة</span></span>
+  </div>
+</footer>
+
+<script>
+  window.PAGE = {
+    titles: { en: 'Privacy Policy · Sihaab', ar: 'سياسة الخصوصية · سحاب' },
+    descs: { en: 'How Sihaab collects, uses and protects your personal data.', ar: 'كيف تجمع سحاب بياناتك الشخصية وتستخدمها وتحميها.' }
+  };
+</script>
+<script src="legal.js"></script>
+</body>
+</html>

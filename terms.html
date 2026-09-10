@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Use · Sihaab</title>
+<meta name="description" content="The terms that govern your use of sihaab.com and the Sihaab waitlist.">
+<meta name="theme-color" content="#0A1128">
+<link rel="icon" type="image/png" href="favicon.png">
+
+<script>
+  // Before first paint: restore saved theme + language (or fall back to system / English).
+  (function () {
+    var root = document.documentElement, theme, lang;
+    try {
+      theme = localStorage.getItem('sihaab-theme');
+      lang = localStorage.getItem('sihaab-lang');
+    } catch (e) { /* storage blocked */ }
+    if (theme !== 'light' && theme !== 'dark') {
+      theme = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+    if (lang !== 'ar' && lang !== 'en') lang = 'en';
+    root.dataset.theme = theme;
+    root.lang = lang;
+    root.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', theme === 'light' ? '#FAF7F0' : '#0A1128');
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Kufi+Arabic:wght@500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Kufi+Arabic:wght@500;600&display=swap" rel="stylesheet"></noscript>
+
+<link rel="stylesheet" href="legal.css">
+</head>
+<body>
+
+<header>
+  <nav class="nav" aria-label="Main">
+    <img src="logo-96.png" alt="" width="40" height="40">
+    <a class="name" href="index.html"><span data-l="en">SIHAAB</span><span data-l="ar">سحاب</span></a>
+    <div class="controls">
+      <button id="lang-toggle" class="toggle" type="button" aria-label="Switch language to Arabic">
+        <span class="ar-label" lang="ar">عربي</span><span class="en-label" lang="en">EN</span>
+      </button>
+      <button id="theme-toggle" class="toggle" type="button" aria-label="Toggle dark or light mode">
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <div data-l="en" lang="en" dir="ltr">
+      <p class="kicker">Legal</p>
+      <h1>Terms of Use</h1>
+      <p class="updated">Last updated: September 10, 2026</p>
+
+      <h2>1. Who we are</h2>
+      <p>Sihaab ("we", "us") operates sihaab.com from Dubai, United Arab Emirates. Contact: <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>.</p>
+
+      <h2>2. Agreement</h2>
+      <p>By using this website or joining the waitlist you agree to these terms. If you do not agree, do not use the site.</p>
+
+      <h2>3. What this site is</h2>
+      <p>sihaab.com presents the Sihaab cloud PC service. Product descriptions, plans, prices, and regions shown on the site are indicative and may change. Nothing on this site is a binding offer.</p>
+
+      <h2>4. The waitlist</h2>
+      <ul>
+        <li>Joining the waitlist is free and open to everyone.</li>
+        <li>It does not guarantee access to the service or any specific price.</li>
+        <li>By joining you allow us to contact you about Sihaab. You can leave the waitlist at any time by emailing us.</li>
+      </ul>
+
+      <h2>5. Intellectual property</h2>
+      <p>The Sihaab name, logo, and all content on this site belong to us or our licensors. You may not copy, modify, or reuse them without our written permission, except as allowed by law.</p>
+
+      <h2>6. Acceptable use</h2>
+      <p>Do not misuse the site: no attempts to disrupt it, probe it for vulnerabilities without permission, scrape it at abusive rates, or use it for anything unlawful.</p>
+
+      <h2>7. Disclaimers</h2>
+      <p>The site is provided "as is" and "as available". To the extent the law allows, we make no warranties about its availability, accuracy, or fitness for a particular purpose.</p>
+
+      <h2>8. Limitation of liability</h2>
+      <p>To the extent permitted by law, we are not liable for indirect or consequential losses arising from your use of this site. Nothing in these terms excludes liability that cannot be excluded under applicable law.</p>
+
+      <h2>9. Changes</h2>
+      <p>We may update these terms. The date at the top reflects the latest version. Continued use of the site after a change means you accept the updated terms.</p>
+
+      <h2>10. Governing law</h2>
+      <p>These terms are governed by the laws of the United Arab Emirates as applied in the Emirate of Dubai, and the courts of Dubai have jurisdiction over any dispute.</p>
+
+      <h2>11. Contact</h2>
+      <p>Questions about these terms: <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>.</p>
+    </div>
+
+    <div data-l="ar" lang="ar" dir="rtl">
+      <p class="kicker">قانوني</p>
+      <h1>شروط الاستخدام</h1>
+      <p class="updated">آخر تحديث: 10 سبتمبر 2026</p>
+
+      <h2>1. من نحن</h2>
+      <p>تدير سحاب ("نحن") موقع sihaab.com من دبي، الإمارات العربية المتحدة. للتواصل: <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>.</p>
+
+      <h2>2. الاتفاق</h2>
+      <p>باستخدامك هذا الموقع أو انضمامك إلى قائمة الانتظار فإنك توافق على هذه الشروط. إذا لم توافق فلا تستخدم الموقع.</p>
+
+      <h2>3. ما هو هذا الموقع</h2>
+      <p>يقدّم sihaab.com خدمة سحاب للحواسيب السحابية. أوصاف المنتج والخطط والأسعار والمناطق المعروضة في الموقع استرشادية وقد تتغير. لا يشكل أي محتوى في هذا الموقع عرضاً ملزماً.</p>
+
+      <h2>4. قائمة الانتظار</h2>
+      <ul>
+        <li>الانضمام إلى قائمة الانتظار مجاني ومتاح للجميع.</li>
+        <li>لا يضمن الانضمام الوصول إلى الخدمة أو سعراً محدداً.</li>
+        <li>بانضمامك تسمح لنا بالتواصل معك بشأن سحاب، ويمكنك مغادرة القائمة في أي وقت بمراسلتنا.</li>
+      </ul>
+
+      <h2>5. الملكية الفكرية</h2>
+      <p>اسم سحاب وشعاره وكل محتوى هذا الموقع ملك لنا أو لمرخّصينا. لا يجوز نسخها أو تعديلها أو إعادة استخدامها دون إذن كتابي منا، إلا بما يسمح به القانون.</p>
+
+      <h2>6. الاستخدام المقبول</h2>
+      <p>لا تسئ استخدام الموقع: لا محاولات لتعطيله، ولا فحص لثغراته دون إذن، ولا كشط لمحتواه بمعدلات مسيئة، ولا استخدامه في أي أمر غير مشروع.</p>
+
+      <h2>7. إخلاء المسؤولية</h2>
+      <p>يُقدَّم الموقع "كما هو" و"كما هو متاح". وإلى الحد الذي يسمح به القانون، لا نقدم أي ضمانات بشأن توفره أو دقته أو ملاءمته لغرض معين.</p>
+
+      <h2>8. حدود المسؤولية</h2>
+      <p>إلى الحد الذي يسمح به القانون، لسنا مسؤولين عن الخسائر غير المباشرة أو التبعية الناشئة عن استخدامك هذا الموقع. ولا يستبعد أي بند في هذه الشروط مسؤولية لا يجيز القانون المعمول به استبعادها.</p>
+
+      <h2>9. التغييرات</h2>
+      <p>قد نحدّث هذه الشروط. التاريخ في الأعلى يعكس أحدث نسخة، واستمرارك في استخدام الموقع بعد أي تغيير يعني قبولك الشروط المحدّثة.</p>
+
+      <h2>10. القانون الواجب التطبيق</h2>
+      <p>تخضع هذه الشروط لقوانين دولة الإمارات العربية المتحدة كما تُطبَّق في إمارة دبي، ولمحاكم دبي الاختصاص في أي نزاع.</p>
+
+      <h2>11. التواصل</h2>
+      <p>للأسئلة حول هذه الشروط: <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="row">
+    <img src="logo-96.png" alt="" width="30" height="30">
+    <span data-l="en">© 2026 Sihaab · Dubai, UAE · <a href="mailto:hello@sihaab.com">hello@sihaab.com</a></span>
+    <span data-l="ar">© 2026 سحاب · دبي، الإمارات · <a href="mailto:hello@sihaab.com">hello@sihaab.com</a></span>
+    <nav class="legal" aria-label="Legal">
+      <a href="index.html"><span data-l="en">Home</span><span data-l="ar">الرئيسية</span></a>
+      <a href="terms.html"><span data-l="en">Terms</span><span data-l="ar">الشروط</span></a>
+      <a href="privacy.html"><span data-l="en">Privacy</span><span data-l="ar">الخصوصية</span></a>
+    </nav>
+    <span class="tagline"><span data-l="en">Sihaab · your computer in the cloud</span><span data-l="ar">سحاب · حاسوبك في السحابة</span></span>
+  </div>
+</footer>
+
+<script>
+  window.PAGE = {
+    titles: { en: 'Terms of Use · Sihaab', ar: 'شروط الاستخدام · سحاب' },
+    descs: { en: 'The terms that govern your use of sihaab.com and the Sihaab waitlist.', ar: 'الشروط التي تحكم استخدامك لموقع sihaab.com وقائمة انتظار سحاب.' }
+  };
+</script>
+<script src="legal.js"></script>
+</body>
+</html>

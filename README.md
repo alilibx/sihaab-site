@@ -6,7 +6,8 @@ Bilingual English/Arabic (header toggle, full RTL via CSS logical properties) wi
 
 ## Files
 
-- `index.html` - the whole site (styles, scripts and both languages' copy inline)
+- `index.html` - the landing page (styles, scripts and both languages' copy inline)
+- `terms.html` / `privacy.html` - legal pages, both languages in the markup, same theme/language toggles
 - `logo.png` - brand mark (transparent)
 - `favicon.png` - small favicon
 

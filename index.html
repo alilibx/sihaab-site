@@ -28,6 +28,8 @@
     root.dataset.theme = theme;
     root.lang = lang;
     root.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', theme === 'light' ? '#FAF7F0' : '#0A1128');
   })();
 </script>
 
@@ -330,6 +332,7 @@
   footer{border-top:1px solid var(--line);padding:34px 0;color:var(--text-dim);font-size:.9rem}
   footer .row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
   footer img{width:30px;height:30px}
+  footer .legal{display:flex;gap:16px}
   footer .tagline{margin-inline-start:auto;color:var(--accent)}
 
   @media (max-width:880px){
@@ -354,8 +357,8 @@
 
 <header>
   <div class="wrap">
-    <nav class="nav" aria-label="Main">
-      <img src="logo.png" alt="" width="40" height="40">
+    <nav class="nav" data-i18n-aria="mainNav" aria-label="Main">
+      <img src="logo-96.png" alt="" width="40" height="40">
       <div class="name" data-i18n="brandName">SIHAAB</div>
       <div class="controls">
         <button id="lang-toggle" class="toggle" type="button" data-i18n-aria="langToggle" aria-label="Switch language to Arabic">
@@ -501,21 +504,25 @@ gpu: A10G · 24 GB</span><span class="caret"></span></pre>
       <p class="kicker io" data-i18n="waitlistKicker">Get started</p>
       <h2 class="io" data-i18n="waitlistTitle">Your machine is waiting</h2>
       <p class="lede io" data-i18n="waitlistLede">Individuals, students, schools, universities, companies, SMEs: everyone gets a machine. Join the waitlist and we'll get you set up.</p>
-      <form id="wl-form" class="io">
+      <form id="wl-form" class="io" method="post">
         <input type="email" id="wl-email" name="email" required
                placeholder="you@example.com"
                aria-label="Your email address" data-i18n-aria="emailAria">
         <button class="btn btn-gold" type="submit" data-i18n="ctaWaitlist">Join the waitlist</button>
       </form>
-      <p class="note io" data-i18n-html="waitlistNote">This opens an email to <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>. No forms, no tracking, a person reads it.</p>
+      <p class="note io" data-i18n-html="waitlistNote">This opens an email to <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>. No forms, no tracking, a person reads it. By joining you accept our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.</p>
     </div>
   </section>
 </main>
 
 <footer>
   <div class="wrap row">
-    <img src="logo.png" alt="">
+    <img src="logo-96.png" alt="" width="30" height="30">
     <span data-i18n-html="footerLine">© 2026 Sihaab · Dubai, UAE · <a href="mailto:hello@sihaab.com">hello@sihaab.com</a></span>
+    <nav class="legal" data-i18n-aria="legalNav" aria-label="Legal">
+      <a href="terms.html" data-i18n="footerTerms">Terms</a>
+      <a href="privacy.html" data-i18n="footerPrivacy">Privacy</a>
+    </nav>
     <span class="tagline" data-i18n="footerTagline">Sihaab · your computer in the cloud</span>
   </div>
 </footer>
@@ -635,8 +642,8 @@ gpu: A10G · 24 GB</span><span class="caret"></span></pre>
     },
     emailAria: { en: 'Your email address', ar: 'بريدك الإلكتروني' },
     waitlistNote: {
-      en: 'This opens an email to <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>. No forms, no tracking, a person reads it.',
-      ar: 'هذا يفتح رسالة بريد إلى <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>. بلا نماذج ولا تتبع، يقرأها إنسان.'
+      en: 'This opens an email to <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>. No forms, no tracking, a person reads it. By joining you accept our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.',
+      ar: 'هذا يفتح رسالة بريد إلى <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>. بلا نماذج ولا تتبع، يقرأها إنسان. بانضمامك فإنك تقبل <a href="terms.html">الشروط</a> و<a href="privacy.html">سياسة الخصوصية</a>.'
     },
     mailtoSubject: { en: 'Sihaab waitlist', ar: 'قائمة انتظار سحاب' },
     mailtoBody: {
@@ -647,6 +654,10 @@ gpu: A10G · 24 GB</span><span class="caret"></span></pre>
       en: '© 2026 Sihaab · Dubai, UAE · <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>',
       ar: '© 2026 سحاب · دبي، الإمارات · <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>'
     },
+    mainNav: { en: 'Main', ar: 'رئيسي' },
+    legalNav: { en: 'Legal', ar: 'قانوني' },
+    footerTerms: { en: 'Terms', ar: 'الشروط' },
+    footerPrivacy: { en: 'Privacy', ar: 'الخصوصية' },
     footerTagline: { en: 'Sihaab · your computer in the cloud', ar: 'سحاب · حاسوبك في السحابة' }
   };
 
@@ -680,13 +691,13 @@ gpu: A10G · 24 GB</span><span class="caret"></span></pre>
 
   /* ============ theme ============ */
   const themeMeta = document.querySelector('meta[name="theme-color"]');
+  const THEME_BG = { dark: '#0A1128', light: '#FAF7F0' }; // mirrors the --bg tokens
   function applyTheme(theme, persist) {
     root.dataset.theme = theme;
-    themeMeta.setAttribute('content', getComputedStyle(root).getPropertyValue('--bg').trim());
+    themeMeta.setAttribute('content', THEME_BG[theme]);
     // Only an explicit toggle becomes a sticky choice; the system default stays live.
     if (persist) { try { localStorage.setItem('sihaab-theme', theme); } catch (e) {} }
   }
-  applyTheme(root.dataset.theme, false); // sync meta with the pre-paint choice
   document.getElementById('theme-toggle').addEventListener('click', () => {
     applyTheme(root.dataset.theme === 'light' ? 'dark' : 'light', true);
   });
