@@ -2,9 +2,11 @@
 
 Static site for [sihaab.com](https://sihaab.com). No build step: plain HTML/CSS/JS, one page.
 
+Bilingual English/Arabic (header toggle, full RTL via CSS logical properties) with dark and light themes (header toggle, defaults to system preference). Both choices persist in `localStorage`.
+
 ## Files
 
-- `index.html` — the whole site (styles and scripts inline)
+- `index.html` — the whole site (styles, scripts and both languages' copy inline)
 - `logo.png` — brand mark (transparent)
 - `favicon.png` — small favicon
 
@@ -33,4 +35,3 @@ Every `git push` to `main` redeploys automatically.
 ## Later
 
 - Replace the mailto waitlist with a real form (Cloudflare Pages Functions + KV, or Tally/Formspark) once volume justifies it.
-- Add `ar/` Arabic version of the page (fonts already loaded: IBM Plex Sans Arabic).
