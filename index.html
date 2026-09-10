@@ -1,87 +1,225 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sihaab — A real computer for everyone. Yours lives in the cloud.</title>
-<meta name="description" content="Subscription Windows & Linux cloud PCs, opened from any browser. Built in MENA, priced for Africa, designed for the world.">
+<title>Sihaab · A real computer for everyone. Yours lives in the cloud.</title>
+<meta name="description" content="Subscription Windows &amp; Linux cloud PCs, opened from any browser. Built in MENA, priced for Africa, designed for the world.">
+<meta property="og:title" content="Sihaab · A real computer for everyone.">
+<meta property="og:description" content="Subscription Windows &amp; Linux cloud PCs, opened from any browser. Built in MENA, priced for Africa, designed for the world.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sihaab.com">
+<meta property="og:image" content="https://sihaab.com/logo.png">
+<meta name="theme-color" content="#0A1128">
 <link rel="icon" type="image/png" href="favicon.png">
+
+<script>
+  // Before first paint: restore saved theme + language (or fall back to system / English).
+  (function () {
+    var root = document.documentElement, theme, lang;
+    try {
+      theme = localStorage.getItem('sihaab-theme');
+      lang = localStorage.getItem('sihaab-lang');
+    } catch (e) { /* storage blocked */ }
+    if (theme !== 'light' && theme !== 'dark') {
+      theme = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+    if (lang !== 'ar' && lang !== 'en') lang = 'en';
+    root.dataset.theme = theme;
+    root.lang = lang;
+    root.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  })();
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Kufi+Arabic:wght@500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Kufi+Arabic:wght@500;600&display=swap" rel="stylesheet"></noscript>
+
 <style>
+  /* ============ theme tokens ============ */
   :root{
-    --midnight:#0E1730;
-    --panel:#131F42;
-    --panel-2:#182752;
     --gold:#F2A93B;
     --gold-deep:#E08A1E;
-    --ice:#CADCFC;
+    --radius:14px;
+    --ease:cubic-bezier(.22,.9,.3,1);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A1128;
+    --bg-raise:#0E1730;
+    --panel:#131F42;
+    --panel-2:#182752;
+    --accent:#CADCFC;
     --text:#F4F7FF;
     --text-dim:#9FAECF;
     --line:#26355F;
-    --radius:14px;
+    --line-soft:rgba(202,220,252,.08);
+    --grid:rgba(202,220,252,.045);
+    --glow:rgba(242,169,59,.16);
+    --glass:rgba(10,17,40,.72);
+    --shadow:0 30px 80px rgba(3,6,18,.6);
+    --term-green:#9FE3B4;
+    --kicker:var(--gold);
   }
+  :root[data-theme="light"]{
+    --bg:#FAF7F0;
+    --bg-raise:#FFFFFF;
+    --panel:#FFFFFF;
+    --panel-2:#F2EDE1;
+    --accent:#2C3E75;
+    --text:#141B36;
+    --text-dim:#5B6584;
+    --line:#E2DCCB;
+    --line-soft:rgba(20,27,54,.08);
+    --grid:rgba(20,27,54,.05);
+    --glow:rgba(242,169,59,.22);
+    --glass:rgba(250,247,240,.78);
+    --shadow:0 26px 70px rgba(72,60,28,.16);
+    --term-green:#1E7A46;
+    --kicker:#B5750D;
+  }
+
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{
-    background:var(--midnight);
+    background:var(--bg);
     color:var(--text);
     font-family:"IBM Plex Sans",system-ui,sans-serif;
     font-size:17px;line-height:1.6;
     -webkit-font-smoothing:antialiased;
+    transition:background .35s var(--ease), color .35s var(--ease);
+    overflow-x:hidden;
   }
-  ::selection{background:var(--gold);color:var(--midnight)}
+  ::selection{background:var(--gold);color:#1A1204}
   .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
   h1,h2,h3{font-family:"Fraunces",serif;font-weight:600;line-height:1.12;letter-spacing:-0.01em}
-  a{color:var(--ice)}
-  .ar{font-family:"IBM Plex Sans Arabic",sans-serif}
+  a{color:var(--accent)}
 
-  /* ---------- header ---------- */
-  header{padding:22px 0}
-  .nav{display:flex;align-items:center;gap:14px}
-  .nav img{width:44px;height:44px}
-  .nav .name{font-family:"Fraunces",serif;font-size:1.35rem;font-weight:600;letter-spacing:.04em}
-  .nav .name span{color:var(--text-dim);font-family:"IBM Plex Sans Arabic",sans-serif;font-size:1rem;margin-inline-start:10px}
-  .nav .cta{margin-left:auto}
+  /* Arabic typography: geometric Kufi display, Plex Arabic body, taller lines. */
+  html[lang="ar"] body{font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;line-height:1.85;font-size:17.5px}
+  html[lang="ar"] h1,
+  html[lang="ar"] h2,
+  html[lang="ar"] h3{font-family:"Noto Kufi Arabic",sans-serif;letter-spacing:0;line-height:1.4}
+
+  /* ============ atmosphere ============ */
+  .sky{position:fixed;inset:0;z-index:-2;pointer-events:none}
+  .sky::before{ /* fine engineering grid, fading toward the horizon */
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(var(--grid) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:56px 56px;
+    -webkit-mask-image:radial-gradient(ellipse 90% 62% at 50% 0%,#000 30%,transparent 78%);
+    mask-image:radial-gradient(ellipse 90% 62% at 50% 0%,#000 30%,transparent 78%);
+  }
+  .sky::after{ /* gold dawn glow behind the hero */
+    content:"";position:absolute;inset:-20% -10% auto -10%;height:90vh;
+    background:
+      radial-gradient(46% 42% at 72% 24%,var(--glow),transparent 70%),
+      radial-gradient(30% 34% at 18% 10%,var(--line-soft),transparent 70%);
+    filter:blur(2px);
+  }
+  .grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='.05'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  :root[data-theme="light"] .grain{opacity:.35}
+
+  /* ============ header ============ */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:var(--glass);
+    -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav{display:flex;align-items:center;gap:14px;padding:14px 0}
+  .nav img{width:40px;height:40px}
+  .nav .name{font-family:"Fraunces",serif;font-size:1.3rem;font-weight:600;letter-spacing:.04em}
+  html[lang="ar"] .nav .name{font-family:"Noto Kufi Arabic",sans-serif;letter-spacing:0}
+  .nav .controls{margin-inline-start:auto;display:flex;align-items:center;gap:10px}
 
   .btn{
     display:inline-block;padding:12px 22px;border-radius:10px;
     font-weight:600;text-decoration:none;font-size:.98rem;
+    font-family:inherit;
     border:1px solid transparent;cursor:pointer;
+    transition:transform .18s var(--ease), background .18s, border-color .18s, box-shadow .18s;
   }
-  .btn:focus-visible{outline:3px solid var(--ice);outline-offset:2px}
-  .btn-gold{background:var(--gold);color:#1A1204}
-  .btn-gold:hover{background:var(--gold-deep)}
+  .btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  .btn:active{transform:translateY(1px)}
+  .btn-gold{background:var(--gold);color:#1A1204;box-shadow:0 0 0 0 var(--glow)}
+  .btn-gold:hover{background:var(--gold-deep);box-shadow:0 6px 24px var(--glow)}
   .btn-ghost{border-color:var(--line);color:var(--text)}
-  .btn-ghost:hover{border-color:var(--ice)}
+  .btn-ghost:hover{border-color:var(--accent)}
 
-  /* ---------- hero ---------- */
-  .hero{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;padding:72px 0 88px}
+  .toggle{
+    display:inline-flex;align-items:center;justify-content:center;gap:6px;
+    height:38px;min-width:38px;padding:0 10px;border-radius:10px;
+    background:transparent;border:1px solid var(--line);color:var(--text);
+    font:inherit;font-size:.88rem;font-weight:600;cursor:pointer;
+    transition:border-color .18s, background .18s;
+  }
+  .toggle:hover{border-color:var(--accent)}
+  .toggle:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  .toggle svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  #theme-toggle .sun{display:none}
+  :root[data-theme="light"] #theme-toggle .sun{display:block}
+  :root[data-theme="light"] #theme-toggle .moon{display:none}
+  #lang-toggle .ar-label{font-family:"Noto Kufi Arabic",sans-serif}
+  html[lang="ar"] #lang-toggle .ar-label{display:none}
+  html[lang="en"] #lang-toggle .en-label{display:none}
+
+  /* ============ hero ============ */
+  .hero{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;padding:84px 0 96px}
   .hero h1{font-size:clamp(2.4rem,5vw,3.6rem);margin-bottom:20px}
+  html[lang="ar"] .hero h1{font-size:clamp(2rem,4.4vw,3.1rem)}
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(100deg,var(--gold) 20%,var(--gold-deep) 60%,var(--gold) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
   .hero .sub{color:var(--text-dim);max-width:34rem;margin-bottom:14px}
-  .hero .ar-line{color:var(--ice);font-size:1.15rem;margin-bottom:34px}
-  .hero .actions{display:flex;gap:14px;flex-wrap:wrap}
+  .hero .tag{
+    display:inline-flex;align-items:center;gap:9px;margin-bottom:22px;
+    border:1px solid var(--line);border-radius:24px;padding:6px 16px;
+    font-size:.85rem;color:var(--text-dim);
+  }
+  .hero .tag i{width:7px;height:7px;border-radius:50%;background:var(--gold);font-style:normal;
+    box-shadow:0 0 0 0 var(--glow);animation:pulse 2.6s ease-out infinite}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(242,169,59,.5)}
+    70%{box-shadow:0 0 0 9px rgba(242,169,59,0)}
+    100%{box-shadow:0 0 0 0 rgba(242,169,59,0)}
+  }
+  .hero .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+
+  /* staggered load reveal */
+  .rise{opacity:0;transform:translateY(18px);animation:rise .8s var(--ease) forwards}
+  .rise.d1{animation-delay:.08s}.rise.d2{animation-delay:.18s}.rise.d3{animation-delay:.3s}
+  .rise.d4{animation-delay:.42s}.rise.d5{animation-delay:.56s}
+  @keyframes rise{to{opacity:1;transform:none}}
 
   /* the one bold element: a live cloud-desktop window */
   .device{
     border:1px solid var(--line);border-radius:var(--radius);
     background:var(--panel);overflow:hidden;
-    box-shadow:0 30px 80px rgba(4,8,22,.55);
+    box-shadow:var(--shadow);
+    direction:ltr; /* a desktop OS chrome stays LTR in both languages */
   }
   .device .bar{
     display:flex;align-items:center;gap:8px;
     padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel-2);
   }
-  .device .dot{width:10px;height:10px;border-radius:50%;background:#3A4A7C}
+  .device .dot{width:10px;height:10px;border-radius:50%;background:var(--line)}
   .device .url{
-    margin-left:10px;flex:1;background:var(--midnight);border:1px solid var(--line);
+    margin-left:10px;flex:1;background:var(--bg-raise);border:1px solid var(--line);
     border-radius:7px;padding:5px 12px;font-size:.82rem;color:var(--text-dim);
+    font-family:ui-monospace,monospace;
   }
-  .screen{position:relative;height:330px;background:linear-gradient(150deg,#16244C 0%,#0C1430 70%)}
+  .screen{position:relative;height:330px;background:linear-gradient(150deg,var(--panel-2) 0%,var(--bg-raise) 70%)}
   .connect{
-    position:absolute;inset:0;display:flex;flex-direction:column;gap:14px;
-    align-items:center;justify-content:center;background:rgba(12,18,40,.92);
+    position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;gap:14px;
+    align-items:center;justify-content:center;background:var(--glass);
+    -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
     transition:opacity .5s ease .9s, visibility .5s ease .9s;
   }
   .connect .ring{
@@ -94,123 +232,165 @@
   @keyframes spin{to{transform:rotate(360deg)}}
 
   .win{
-    position:absolute;border-radius:9px;background:#1B2A55;border:1px solid #31447E;
-    box-shadow:0 14px 34px rgba(4,8,22,.45);overflow:hidden;font-size:.72rem;
+    position:absolute;border-radius:9px;background:var(--panel);border:1px solid var(--line);
+    box-shadow:0 14px 34px rgba(4,8,22,.3);overflow:hidden;font-size:.72rem;
   }
-  .win .t{padding:6px 10px;background:#22346B;color:var(--ice);font-weight:500}
-  .win pre{padding:10px 12px;color:#9FE3B4;font-family:ui-monospace,monospace;line-height:1.7;font-size:.72rem}
+  .win .t{padding:6px 10px;background:var(--panel-2);color:var(--accent);font-weight:500}
+  .win pre{padding:10px 12px;color:var(--term-green);font-family:ui-monospace,monospace;line-height:1.7;font-size:.72rem;min-height:66px}
+  .win pre .caret{display:inline-block;width:7px;height:11px;background:var(--term-green);
+    vertical-align:-1px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
   .win.sheet{left:8%;top:14%;width:46%}
   .win.sheet .cells{display:grid;grid-template-columns:repeat(4,1fr)}
-  .win.sheet .cells i{height:20px;border:.5px solid #2C3E75;font-style:normal}
+  .win.sheet .cells i{height:20px;border:.5px solid var(--line);font-style:normal}
   .win.sheet .cells i.g{background:rgba(242,169,59,.28)}
   .win.term{right:7%;top:32%;width:44%}
   .taskbar{
-    position:absolute;left:0;right:0;bottom:0;height:38px;background:rgba(10,16,36,.85);
+    position:absolute;left:0;right:0;bottom:0;height:38px;background:var(--glass);
     border-top:1px solid var(--line);display:flex;align-items:center;gap:10px;padding:0 14px;
   }
   .taskbar b{width:20px;height:20px;border-radius:5px;background:var(--panel-2);border:1px solid var(--line)}
   .latency{
-    margin-left:auto;font-size:.75rem;color:var(--ice);
-    background:rgba(202,220,252,.1);border:1px solid var(--line);
+    margin-left:auto;font-size:.75rem;color:var(--accent);
+    background:var(--line-soft);border:1px solid var(--line);
     border-radius:20px;padding:3px 12px;
   }
   .latency em{color:var(--gold);font-style:normal;font-weight:600}
+  :root[data-theme="light"] .latency em{color:var(--kicker)}
 
-  /* ---------- sections ---------- */
-  section{padding:76px 0;border-top:1px solid var(--line)}
-  .kicker{color:var(--gold);font-weight:600;font-size:.95rem;margin-bottom:10px}
+  /* ============ sections ============ */
+  section{padding:80px 0;border-top:1px solid var(--line)}
+  .kicker{
+    color:var(--kicker);font-weight:600;font-size:.82rem;margin-bottom:12px;
+    text-transform:uppercase;letter-spacing:.16em;
+    display:flex;align-items:center;gap:12px;
+  }
+  html[lang="ar"] .kicker{letter-spacing:0;font-size:.95rem}
+  .kicker::before{content:"";width:26px;height:1px;background:var(--kicker)}
   section h2{font-size:clamp(1.7rem,3.4vw,2.4rem);margin-bottom:16px;max-width:36rem}
   .lede{color:var(--text-dim);max-width:38rem;margin-bottom:44px}
+
+  /* scroll reveal (hidden state only when JS is running to reveal it again) */
+  .io{transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  html.js .io:not(.in){opacity:0;transform:translateY(22px)}
+  .io.d1{transition-delay:.08s}.io.d2{transition-delay:.16s}.io.d3{transition-delay:.24s}
 
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;counter-reset:step}
   .step{counter-increment:step;border-top:2px solid var(--gold);padding-top:18px}
   .step::before{
     content:counter(step);display:block;
-    font-family:"Fraunces",serif;font-size:1.6rem;color:var(--gold);margin-bottom:8px;
+    font-family:"Fraunces",serif;font-size:1.6rem;color:var(--kicker);margin-bottom:8px;
   }
   .step h3{font-size:1.15rem;margin-bottom:8px}
   .step p{color:var(--text-dim);font-size:.95rem}
 
   .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
-  .tier{padding:30px 28px;border-radius:var(--radius);display:flex;flex-direction:column}
-  .tier.side{border:1px solid var(--line)}
-  .tier.main{background:var(--panel);border:1px solid var(--gold)}
+  .tier{
+    padding:30px 28px;border-radius:var(--radius);display:flex;flex-direction:column;
+    transition:transform .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .tier:hover{transform:translateY(-4px)}
+  .tier.side{border:1px solid var(--line);background:var(--bg-raise)}
+  .tier.main{background:var(--panel);border:1px solid var(--gold);position:relative}
+  .tier.main:hover{box-shadow:0 18px 50px var(--glow)}
   .tier h3{font-size:1.2rem;margin-bottom:4px}
-  .tier .price{font-family:"Fraunces",serif;font-size:2rem;color:var(--gold);margin:10px 0 4px}
+  .tier .price{font-family:"Fraunces",serif;font-size:2rem;color:var(--kicker);margin:10px 0 4px}
+  html[lang="ar"] .tier .price{font-family:"Noto Kufi Arabic",sans-serif;font-size:1.7rem}
   .tier .per{color:var(--text-dim);font-size:.85rem;margin-bottom:18px}
   .tier ul{list-style:none;display:grid;gap:10px;margin-bottom:24px}
-  .tier li{padding-left:22px;position:relative;font-size:.95rem;color:var(--text-dim)}
-  .tier li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;border-radius:50%;background:var(--gold)}
+  .tier li{padding-inline-start:22px;position:relative;font-size:.95rem;color:var(--text-dim)}
+  .tier li::before{content:"";position:absolute;inset-inline-start:0;top:9px;width:9px;height:9px;border-radius:50%;background:var(--gold)}
+  html[lang="ar"] .tier li::before{top:12px}
   .tier .btn{margin-top:auto;text-align:center}
   .edu{
     margin-top:26px;padding:22px 26px;border-radius:var(--radius);
-    background:rgba(202,220,252,.07);border:1px solid var(--line);color:var(--text-dim);font-size:.98rem;
+    background:var(--line-soft);border:1px solid var(--line);color:var(--text-dim);font-size:.98rem;
   }
   .edu strong{color:var(--text)}
 
   .regions{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
   .chip{
-    border:1px solid var(--line);border-radius:24px;padding:8px 18px;font-size:.92rem;color:var(--ice);
+    border:1px solid var(--line);border-radius:24px;padding:8px 18px;font-size:.92rem;color:var(--accent);
+    background:var(--bg-raise);
+    transition:border-color .2s, transform .2s var(--ease);
   }
-  .chip em{color:var(--gold);font-style:normal;font-weight:600;margin-left:6px}
+  .chip:hover{border-color:var(--gold);transform:translateY(-2px)}
   .mission{margin-top:36px;max-width:44rem;font-family:"Fraunces",serif;font-size:1.35rem;line-height:1.5;color:var(--text)}
-  .mission .ar{display:block;margin-top:14px;color:var(--ice);font-size:1.1rem}
+  html[lang="ar"] .mission{font-family:"Noto Kufi Arabic",sans-serif;font-size:1.2rem;line-height:1.9}
 
   .waitlist form{display:flex;gap:12px;max-width:34rem;flex-wrap:wrap}
   .waitlist input{
     flex:1;min-width:230px;padding:13px 16px;border-radius:10px;font-size:1rem;
-    background:var(--panel);border:1px solid var(--line);color:var(--text);
+    background:var(--bg-raise);border:1px solid var(--line);color:var(--text);font-family:inherit;
   }
-  .waitlist input:focus-visible{outline:3px solid var(--ice);outline-offset:1px}
+  .waitlist input::placeholder{color:var(--text-dim)}
+  .waitlist input:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
   .waitlist .note{color:var(--text-dim);font-size:.9rem;margin-top:14px}
 
-  footer{border-top:1px solid var(--line);padding:34px 0;display:flex;align-items:center;gap:16px;color:var(--text-dim);font-size:.9rem}
+  footer{border-top:1px solid var(--line);padding:34px 0;color:var(--text-dim);font-size:.9rem}
+  footer .row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
   footer img{width:30px;height:30px}
-  footer .ar{margin-left:auto;color:var(--ice)}
+  footer .tagline{margin-inline-start:auto;color:var(--accent)}
 
   @media (max-width:880px){
-    .hero{grid-template-columns:1fr;padding:44px 0 64px}
+    .hero{grid-template-columns:1fr;padding:48px 0 64px}
     .steps,.tiers{grid-template-columns:1fr}
     .nav .cta{display:none}
-    footer{flex-wrap:wrap}
   }
   @media (prefers-reduced-motion:reduce){
-    .connect{display:none}
-    .connect .ring{animation:none}
     html{scroll-behavior:auto}
+    .connect{display:none}
+    .rise{opacity:1;transform:none;animation:none}
+    .io{opacity:1;transform:none;transition:none}
+    .hero .tag i,.connect .ring,.win pre .caret{animation:none}
+    .tier:hover,.chip:hover{transform:none}
   }
 </style>
 </head>
 <body>
 
-<header class="wrap">
-  <nav class="nav">
-    <img src="logo.png" alt="Sihaab logo — a cloud made of circuit lines">
-    <div class="name">SIHAAB<span class="ar">سحاب</span></div>
-    <a class="btn btn-gold cta" href="#waitlist">Join the waitlist</a>
-  </nav>
+<div class="sky" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header>
+  <div class="wrap">
+    <nav class="nav" aria-label="Main">
+      <img src="logo.png" alt="" width="40" height="40">
+      <div class="name" data-i18n="brandName">SIHAAB</div>
+      <div class="controls">
+        <button id="lang-toggle" class="toggle" type="button" data-i18n-aria="langToggle" aria-label="Switch language to Arabic">
+          <span class="ar-label" lang="ar">عربي</span><span class="en-label" lang="en">EN</span>
+        </button>
+        <button id="theme-toggle" class="toggle" type="button" data-i18n-aria="themeToggle" aria-label="Toggle dark or light mode">
+          <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+        <a class="btn btn-gold cta" href="#waitlist" data-i18n="ctaWaitlist">Join the waitlist</a>
+      </div>
+    </nav>
+  </div>
 </header>
 
 <main>
   <div class="wrap hero">
     <div>
-      <h1>A real computer for everyone. Yours lives in the cloud.</h1>
-      <p class="sub">Sihaab gives you a full Windows or Linux machine running in a data center near you — opened from any browser, on any device. Old laptop, shared PC, basic tablet: all of them become a modern workstation.</p>
-      <p class="ar-line ar">حاسوب حقيقي للجميع — يعيش في السحابة.</p>
-      <div class="actions">
-        <a class="btn btn-gold" href="#waitlist">Join the waitlist</a>
-        <a class="btn btn-ghost" href="#machines">See the machines</a>
+      <p class="tag rise d1"><i aria-hidden="true"></i><span data-i18n="heroTag">Cloud PCs for everyone, from students to enterprises</span></p>
+      <h1 class="rise d2" data-i18n-html="heroTitle">A real computer for everyone. Yours lives in <em>the cloud</em>.</h1>
+      <p class="sub rise d3" data-i18n="heroSub">Sihaab gives you a full Windows or Linux machine running in a data center near you. Open it from any browser, on any device. Old laptop, shared PC, basic tablet: all of them become a modern workstation.</p>
+      <div class="actions rise d4">
+        <a class="btn btn-gold" href="#waitlist" data-i18n="ctaWaitlist">Join the waitlist</a>
+        <a class="btn btn-ghost" href="#machines" data-i18n="ctaMachines">See the machines</a>
       </div>
     </div>
 
-    <div class="device" aria-label="Illustration: a cloud desktop streaming inside a browser window">
+    <div class="device rise d5" role="img" data-i18n-aria="deviceAlt" aria-label="Illustration: a cloud desktop streaming inside a browser window">
       <div class="bar">
         <span class="dot"></span><span class="dot"></span><span class="dot"></span>
         <span class="url">pc.sihaab.com/your-machine</span>
       </div>
       <div class="screen">
         <div class="win sheet">
-          <div class="t">Budget — Q4.xlsx</div>
+          <div class="t">Budget - Q4.xlsx</div>
           <div class="cells" aria-hidden="true">
             <i></i><i class="g"></i><i></i><i></i>
             <i></i><i></i><i class="g"></i><i></i>
@@ -218,18 +398,18 @@
           </div>
         </div>
         <div class="win term">
-          <div class="t">terminal — ubuntu</div>
-          <pre>$ python train.py
+          <div class="t">terminal - ubuntu</div>
+          <pre aria-hidden="true"><span id="term-text">$ python train.py
 epoch 3/10  loss 0.214
-gpu: A10G · 24 GB</pre>
+gpu: A10G · 24 GB</span><span class="caret"></span></pre>
         </div>
         <div class="taskbar">
           <b></b><b></b><b></b>
-          <span class="latency">Connected · <em>38 ms</em> · Dubai</span>
+          <span class="latency"><span data-i18n="latencyConnected">Connected</span> · <em><span id="latency-ms">38</span><span data-i18n="latencyUnit"> ms</span></em> · <span data-i18n="latencyCity">Dubai</span></span>
         </div>
         <div class="connect">
           <div class="ring" aria-hidden="true"></div>
-          <p>Connecting to your machine…</p>
+          <p data-i18n="connecting">Connecting to your machine…</p>
         </div>
       </div>
     </div>
@@ -237,20 +417,20 @@ gpu: A10G · 24 GB</pre>
 
   <section id="how">
     <div class="wrap">
-      <p class="kicker">How it works</p>
-      <h2>Three steps between you and a machine that never breaks</h2>
+      <p class="kicker io" data-i18n="howKicker">How it works</p>
+      <h2 class="io" data-i18n="howTitle">Three steps between you and a machine that never breaks</h2>
       <div class="steps">
-        <div class="step">
-          <h3>Pick your machine</h3>
-          <p>Windows or Linux, sized for what you do — from writing essays to training models on a rented GPU.</p>
+        <div class="step io d1">
+          <h3 data-i18n="step1Title">Pick your machine</h3>
+          <p data-i18n="step1Body">Windows or Linux, sized for what you do: from writing essays to training models on a rented GPU.</p>
         </div>
-        <div class="step">
-          <h3>Open your browser</h3>
-          <p>Sign in from anything with a screen and internet. Nothing to install, nothing stored on the device.</p>
+        <div class="step io d2">
+          <h3 data-i18n="step2Title">Open your browser</h3>
+          <p data-i18n="step2Body">Sign in from anything with a screen and internet. Nothing to install, nothing stored on the device.</p>
         </div>
-        <div class="step">
-          <h3>Work from anywhere</h3>
-          <p>Your files, apps and desktop are exactly where you left them — on any device, in any city. Lose the device, keep the computer.</p>
+        <div class="step io d3">
+          <h3 data-i18n="step3Title">Work from anywhere</h3>
+          <p data-i18n="step3Body">Your files, apps and desktop are exactly where you left them, on any device, in any city. Lose the device, keep the computer.</p>
         </div>
       </div>
     </div>
@@ -258,99 +438,330 @@ gpu: A10G · 24 GB</pre>
 
   <section id="machines">
     <div class="wrap">
-      <p class="kicker">Machines</p>
-      <h2>One subscription. The whole computer problem, solved.</h2>
-      <p class="lede">Every plan is fully managed: provisioning, security, patching and backups are handled for you. No IT department required.</p>
+      <p class="kicker io" data-i18n="machinesKicker">Machines</p>
+      <h2 class="io" data-i18n="machinesTitle">One subscription. The whole computer problem, solved.</h2>
+      <p class="lede io" data-i18n="machinesLede">Every plan is fully managed: provisioning, security, patching and backups are handled for you. No IT department required.</p>
       <div class="tiers">
-        <div class="tier side">
-          <h3>Access</h3>
-          <p class="price">from $15</p>
-          <p class="per">per user / month</p>
+        <div class="tier side io d1">
+          <h3 data-i18n="tier1Name">Access</h3>
+          <p class="price" data-i18n="tier1Price">from $15</p>
+          <p class="per" data-i18n="perUser">per user / month</p>
           <ul>
-            <li>Bring any device — browser only</li>
-            <li>Windows &amp; Linux desktops</li>
-            <li>For people who own a device, just not a capable one</li>
+            <li data-i18n="tier1F1">Bring any device. A browser is enough</li>
+            <li data-i18n="tier1F2">Windows &amp; Linux desktops</li>
+            <li data-i18n="tier1F3">For people who own a device, just not a capable one</li>
           </ul>
-          <a class="btn btn-ghost" href="#waitlist">Join the waitlist</a>
+          <a class="btn btn-ghost" href="#waitlist" data-i18n="ctaWaitlist">Join the waitlist</a>
         </div>
-        <div class="tier main">
-          <h3>Complete</h3>
-          <p class="price">from $35</p>
-          <p class="per">per user / month</p>
+        <div class="tier main io d2">
+          <h3 data-i18n="tier2Name">Complete</h3>
+          <p class="price" data-i18n="tier2Price">from $35</p>
+          <p class="per" data-i18n="perUser">per user / month</p>
           <ul>
-            <li>Thin laptop included in the plan</li>
-            <li>Breaks? Swapped in 24 hours — files, apps and settings intact</li>
-            <li>Zero IT overhead for schools and companies</li>
+            <li data-i18n="tier2F1">Thin laptop included in the plan</li>
+            <li data-i18n="tier2F2">Breaks? Swapped in 24 hours with files, apps and settings intact</li>
+            <li data-i18n="tier2F3">Zero IT overhead for schools and companies</li>
           </ul>
-          <a class="btn btn-gold" href="#waitlist">Join the waitlist</a>
+          <a class="btn btn-gold" href="#waitlist" data-i18n="ctaWaitlist">Join the waitlist</a>
         </div>
-        <div class="tier side">
-          <h3>Sovereign</h3>
-          <p class="price">Custom</p>
-          <p class="per">annual contract</p>
+        <div class="tier side io d3">
+          <h3 data-i18n="tier3Name">Sovereign</h3>
+          <p class="price" data-i18n="tier3Price">Custom</p>
+          <p class="per" data-i18n="tier3Per">annual contract</p>
           <ul>
-            <li>On-premises or private-cloud deployment</li>
-            <li>Data residency, audit and compliance</li>
-            <li>Governments, banks and large universities</li>
+            <li data-i18n="tier3F1">On-premises or private-cloud deployment</li>
+            <li data-i18n="tier3F2">Data residency, audit and compliance</li>
+            <li data-i18n="tier3F3">Governments, banks and large universities</li>
           </ul>
-          <a class="btn btn-ghost" href="mailto:hello@sihaab.com?subject=Sovereign%20deployment">Talk to us</a>
+          <a class="btn btn-ghost" href="mailto:hello@sihaab.com?subject=Sovereign%20deployment" data-i18n="ctaTalk">Talk to us</a>
         </div>
       </div>
-      <p class="edu"><strong>Built for education:</strong> spin up 40 identical GPU machines for a deep-learning course and retire them after finals. Exam lock-down mode, central software licensing, and metered AI access for every student.</p>
+      <p class="edu io" data-i18n-html="eduNote"><strong>Teams and classrooms, handled:</strong> spin up 40 identical GPU machines for a deep-learning course or a design studio, and retire them when the project ends. Exam lock-down mode, central software licensing, and metered AI access for every seat.</p>
     </div>
   </section>
 
   <section id="regions">
     <div class="wrap">
-      <p class="kicker">Regions</p>
-      <h2>Your machine runs close to you</h2>
-      <p class="lede">Desktops are hosted in-country or in-region, so they feel local — and your data stays where the law expects it.</p>
-      <div class="regions">
-        <span class="chip">Dubai <em>live first</em></span>
-        <span class="chip">Riyadh <em>2027</em></span>
-        <span class="chip">Johannesburg <em>2027</em></span>
-        <span class="chip">Nairobi <em>2027</em></span>
-        <span class="chip">Lagos <em>planned</em></span>
+      <p class="kicker io" data-i18n="regionsKicker">Regions</p>
+      <h2 class="io" data-i18n="regionsTitle">Serving the Middle East &amp; Africa</h2>
+      <p class="lede io" data-i18n="regionsLede">Sihaab runs across the MEA region. Desktops are hosted in-country or in-region, so they feel local, and your data stays where the law expects it.</p>
+      <div class="regions io">
+        <span class="chip" data-i18n="regionDubai">Dubai</span>
+        <span class="chip" data-i18n="regionRiyadh">Riyadh</span>
+        <span class="chip" data-i18n="regionJoburg">Johannesburg</span>
+        <span class="chip" data-i18n="regionNairobi">Nairobi</span>
+        <span class="chip" data-i18n="regionLagos">Lagos</span>
       </div>
-      <p class="mission">Where a capable laptop costs months of income, we remove the device from the equation. Any shared PC, school lab or basic tablet becomes a modern workstation — because the computer lives in a data center on the continent.
-        <span class="ar">حيث تكون أجهزة الحاسوب بعيدة المنال، نجعل الحوسبة في متناول الجميع.</span>
-      </p>
+      <p class="mission io" data-i18n="mission">Where a capable laptop costs months of income, we remove the device from the equation. Any shared PC, school lab or basic tablet becomes a modern workstation, because the computer lives in a data center on the continent.</p>
     </div>
   </section>
 
   <section id="waitlist" class="waitlist">
     <div class="wrap">
-      <p class="kicker">Early access</p>
-      <h2>Be first in line</h2>
-      <p class="lede">We're onboarding universities, schools and companies in the GCC first, then Africa. Tell us who you are and we'll reach out.</p>
-      <form id="wl-form">
-        <input type="email" id="wl-email" name="email" placeholder="you@university.edu" required aria-label="Your email address">
-        <button class="btn btn-gold" type="submit">Join the waitlist</button>
+      <p class="kicker io" data-i18n="waitlistKicker">Get started</p>
+      <h2 class="io" data-i18n="waitlistTitle">Your machine is waiting</h2>
+      <p class="lede io" data-i18n="waitlistLede">Individuals, students, schools, universities, companies, SMEs: everyone gets a machine. Join the waitlist and we'll get you set up.</p>
+      <form id="wl-form" class="io">
+        <input type="email" id="wl-email" name="email" required
+               placeholder="you@example.com"
+               aria-label="Your email address" data-i18n-aria="emailAria">
+        <button class="btn btn-gold" type="submit" data-i18n="ctaWaitlist">Join the waitlist</button>
       </form>
-      <p class="note">This opens an email to <a href="mailto:hello@sihaab.com">hello@sihaab.com</a> — no forms, no tracking, a person reads it.</p>
+      <p class="note io" data-i18n-html="waitlistNote">This opens an email to <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>. No forms, no tracking, a person reads it.</p>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap" style="display:flex;align-items:center;gap:16px;width:100%">
+  <div class="wrap row">
     <img src="logo.png" alt="">
-    <span>© 2026 Sihaab · Dubai, UAE · <a href="mailto:hello@sihaab.com">hello@sihaab.com</a></span>
-    <span class="ar">سحاب — حاسوبك في السحابة</span>
+    <span data-i18n-html="footerLine">© 2026 Sihaab · Dubai, UAE · <a href="mailto:hello@sihaab.com">hello@sihaab.com</a></span>
+    <span class="tagline" data-i18n="footerTagline">Sihaab · your computer in the cloud</span>
   </div>
 </footer>
 
 <script>
-  // one orchestrated moment: the desktop "connects" on load
-  addEventListener('load', () => document.body.classList.add('connected'));
+  'use strict';
 
-  // waitlist: compose an email (static site, no backend)
+  /* ============ translations ============ */
+  const I18N = {
+    docTitle: {
+      en: 'Sihaab · A real computer for everyone. Yours lives in the cloud.',
+      ar: 'سحاب · حاسوب حقيقي للجميع. حاسوبك يعيش في السحابة.'
+    },
+    docDescription: {
+      en: 'Subscription Windows & Linux cloud PCs, opened from any browser. Built in MENA, priced for Africa, designed for the world.',
+      ar: 'أجهزة ويندوز ولينكس سحابية بالاشتراك، تفتحها من أي متصفح. صُنعت في الشرق الأوسط، بأسعار تناسب أفريقيا، وصُممت للعالم.'
+    },
+    themeToggle: { en: 'Toggle dark or light mode', ar: 'التبديل بين الوضع الداكن والفاتح' },
+    langToggle: { en: 'Switch language to Arabic', ar: 'تغيير اللغة إلى الإنجليزية' },
+    brandName: { en: 'SIHAAB', ar: 'سحاب' },
+    ctaWaitlist: { en: 'Join the waitlist', ar: 'انضم إلى قائمة الانتظار' },
+    ctaMachines: { en: 'See the machines', ar: 'شاهد الأجهزة' },
+    ctaTalk: { en: 'Talk to us', ar: 'تحدث إلينا' },
+    heroTag: { en: 'Cloud PCs for everyone, from students to enterprises', ar: 'حواسيب سحابية للجميع، من الطلاب إلى المؤسسات' },
+    heroTitle: {
+      en: 'A real computer for everyone. Yours lives in <em>the cloud</em>.',
+      ar: 'حاسوب حقيقي للجميع. حاسوبك يعيش في <em>السحاب</em>.'
+    },
+    heroSub: {
+      en: 'Sihaab gives you a full Windows or Linux machine running in a data center near you. Open it from any browser, on any device. Old laptop, shared PC, basic tablet: all of them become a modern workstation.',
+      ar: 'يمنحك سحاب جهاز ويندوز أو لينكس كاملاً يعمل في مركز بيانات قريب منك، تفتحه من أي متصفح وعلى أي جهاز. حاسوب قديم، أو جهاز مشترك، أو جهاز لوحي بسيط: كلها تتحول إلى محطة عمل حديثة.'
+    },
+    deviceAlt: {
+      en: 'Illustration: a cloud desktop streaming inside a browser window',
+      ar: 'رسم توضيحي: سطح مكتب سحابي يُبث داخل نافذة متصفح'
+    },
+    connecting: { en: 'Connecting to your machine…', ar: 'جارٍ الاتصال بجهازك…' },
+    latencyConnected: { en: 'Connected', ar: 'متصل' },
+    latencyUnit: { en: ' ms', ar: ' م.ث' },
+    latencyCity: { en: 'Dubai', ar: 'دبي' },
+    howKicker: { en: 'How it works', ar: 'كيف يعمل' },
+    howTitle: {
+      en: 'Three steps between you and a machine that never breaks',
+      ar: 'ثلاث خطوات بينك وبين جهاز لا يتعطل أبداً'
+    },
+    step1Title: { en: 'Pick your machine', ar: 'اختر جهازك' },
+    step1Body: {
+      en: 'Windows or Linux, sized for what you do: from writing essays to training models on a rented GPU.',
+      ar: 'ويندوز أو لينكس، بمواصفات تناسب ما تقوم به: من كتابة المقالات إلى تدريب النماذج على معالج رسوميات مستأجر.'
+    },
+    step2Title: { en: 'Open your browser', ar: 'افتح متصفحك' },
+    step2Body: {
+      en: 'Sign in from anything with a screen and internet. Nothing to install, nothing stored on the device.',
+      ar: 'سجّل دخولك من أي جهاز له شاشة واتصال بالإنترنت. لا شيء يُثبَّت، ولا شيء يُخزَّن على الجهاز.'
+    },
+    step3Title: { en: 'Work from anywhere', ar: 'اعمل من أي مكان' },
+    step3Body: {
+      en: 'Your files, apps and desktop are exactly where you left them, on any device, in any city. Lose the device, keep the computer.',
+      ar: 'ملفاتك وتطبيقاتك وسطح مكتبك تماماً حيث تركتها، على أي جهاز وفي أي مدينة. قد تفقد الجهاز، لكن الحاسوب يبقى لك.'
+    },
+    machinesKicker: { en: 'Machines', ar: 'الأجهزة' },
+    machinesTitle: {
+      en: 'One subscription. The whole computer problem, solved.',
+      ar: 'اشتراك واحد يحل مشكلة الحاسوب كلها.'
+    },
+    machinesLede: {
+      en: 'Every plan is fully managed: provisioning, security, patching and backups are handled for you. No IT department required.',
+      ar: 'كل خطة مُدارة بالكامل: التجهيز والأمان والتحديثات والنسخ الاحتياطي، كلها علينا. لا حاجة لقسم تقنية معلومات.'
+    },
+    tier1Name: { en: 'Access', ar: 'الوصول' },
+    tier1Price: { en: 'from $15', ar: 'من 15 دولاراً' },
+    tier2Name: { en: 'Complete', ar: 'المتكامل' },
+    tier2Price: { en: 'from $35', ar: 'من 35 دولاراً' },
+    tier3Name: { en: 'Sovereign', ar: 'السيادي' },
+    tier3Price: { en: 'Custom', ar: 'حسب الطلب' },
+    tier3Per: { en: 'annual contract', ar: 'عقد سنوي' },
+    perUser: { en: 'per user / month', ar: 'لكل مستخدم شهرياً' },
+    tier1F1: { en: 'Bring any device. A browser is enough', ar: 'استخدم أي جهاز لديك، المتصفح يكفي' },
+    tier1F2: { en: 'Windows & Linux desktops', ar: 'أسطح مكتب ويندوز ولينكس' },
+    tier1F3: {
+      en: 'For people who own a device, just not a capable one',
+      ar: 'لمن يملك جهازاً، لكنه ليس بالقدرة الكافية'
+    },
+    tier2F1: { en: 'Thin laptop included in the plan', ar: 'حاسوب محمول خفيف ضمن الخطة' },
+    tier2F2: {
+      en: 'Breaks? Swapped in 24 hours with files, apps and settings intact',
+      ar: 'تعطّل؟ نستبدله خلال 24 ساعة، وملفاتك وتطبيقاتك وإعداداتك كما هي'
+    },
+    tier2F3: { en: 'Zero IT overhead for schools and companies', ar: 'صفر أعباء تقنية على المدارس والشركات' },
+    tier3F1: { en: 'On-premises or private-cloud deployment', ar: 'نشر داخل منشأتك أو على سحابة خاصة' },
+    tier3F2: { en: 'Data residency, audit and compliance', ar: 'إقامة البيانات محلياً، تدقيق وامتثال' },
+    tier3F3: { en: 'Governments, banks and large universities', ar: 'للحكومات والبنوك والجامعات الكبرى' },
+    eduNote: {
+      en: '<strong>Teams and classrooms, handled:</strong> spin up 40 identical GPU machines for a deep-learning course or a design studio, and retire them when the project ends. Exam lock-down mode, central software licensing, and metered AI access for every seat.',
+      ar: '<strong>للفرق والفصول الدراسية على حد سواء:</strong> جهّز 40 جهازاً متطابقاً بمعالجات رسوميات لمقرر تعلّم عميق أو استوديو تصميم، ثم أوقفها عند انتهاء المشروع. وضع قفل الامتحانات، وترخيص مركزي للبرمجيات، ووصول مقنَّن للذكاء الاصطناعي لكل مقعد.'
+    },
+    regionsKicker: { en: 'Regions', ar: 'المناطق' },
+    regionsTitle: { en: 'Serving the Middle East & Africa', ar: 'نخدم منطقة الشرق الأوسط وأفريقيا' },
+    regionsLede: {
+      en: 'Sihaab runs across the MEA region. Desktops are hosted in-country or in-region, so they feel local, and your data stays where the law expects it.',
+      ar: 'يعمل سحاب في منطقة الشرق الأوسط وأفريقيا. تُستضاف الأجهزة داخل بلدك أو منطقتك فتشعر وكأنها محلية، وتبقى بياناتك حيث يتوقعها القانون.'
+    },
+    regionDubai: { en: 'Dubai', ar: 'دبي' },
+    regionRiyadh: { en: 'Riyadh', ar: 'الرياض' },
+    regionJoburg: { en: 'Johannesburg', ar: 'جوهانسبرغ' },
+    regionNairobi: { en: 'Nairobi', ar: 'نيروبي' },
+    regionLagos: { en: 'Lagos', ar: 'لاغوس' },
+    mission: {
+      en: 'Where a capable laptop costs months of income, we remove the device from the equation. Any shared PC, school lab or basic tablet becomes a modern workstation, because the computer lives in a data center on the continent.',
+      ar: 'حيث يكلّف الحاسوب المقتدر شهوراً من الدخل، نُخرج الجهاز من المعادلة. أي حاسوب مشترك أو مختبر مدرسي أو جهاز لوحي بسيط يصبح محطة عمل حديثة، لأن الحاسوب يعيش في مركز بيانات على القارة نفسها.'
+    },
+    waitlistKicker: { en: 'Get started', ar: 'ابدأ الآن' },
+    waitlistTitle: { en: 'Your machine is waiting', ar: 'جهازك في انتظارك' },
+    waitlistLede: {
+      en: 'Individuals, students, schools, universities, companies, SMEs: everyone gets a machine. Join the waitlist and we\'ll get you set up.',
+      ar: 'أفراد وطلاب ومدارس وجامعات وشركات ومنشآت صغيرة ومتوسطة: الجميع يحصل على جهاز. انضم إلى قائمة الانتظار وسنجهّز لك كل شيء.'
+    },
+    emailAria: { en: 'Your email address', ar: 'بريدك الإلكتروني' },
+    waitlistNote: {
+      en: 'This opens an email to <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>. No forms, no tracking, a person reads it.',
+      ar: 'هذا يفتح رسالة بريد إلى <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>. بلا نماذج ولا تتبع، يقرأها إنسان.'
+    },
+    mailtoSubject: { en: 'Sihaab waitlist', ar: 'قائمة انتظار سحاب' },
+    mailtoBody: {
+      en: 'Please add me to the waitlist.\nMy email: {email}\nI am a: (individual / student / school / university / company / SME)',
+      ar: 'أرجو إضافتي إلى قائمة الانتظار.\nبريدي الإلكتروني: {email}\nأنا: (فرد / طالب / مدرسة / جامعة / شركة / منشأة صغيرة أو متوسطة)'
+    },
+    footerLine: {
+      en: '© 2026 Sihaab · Dubai, UAE · <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>',
+      ar: '© 2026 سحاب · دبي، الإمارات · <a href="mailto:hello@sihaab.com">hello@sihaab.com</a>'
+    },
+    footerTagline: { en: 'Sihaab · your computer in the cloud', ar: 'سحاب · حاسوبك في السحابة' }
+  };
+
+  const root = document.documentElement;
+
+  function currentLang() { return root.lang === 'ar' ? 'ar' : 'en'; }
+
+  function applyLang(lang, persist) {
+    root.lang = lang;
+    root.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.title = I18N.docTitle[lang];
+    document.querySelector('meta[name="description"]').setAttribute('content', I18N.docDescription[lang]);
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const t = I18N[el.dataset.i18n];
+      if (t) el.textContent = t[lang];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const t = I18N[el.dataset.i18nHtml];
+      if (t) el.innerHTML = t[lang];
+    });
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+      const t = I18N[el.dataset.i18nAria];
+      if (t) el.setAttribute('aria-label', t[lang]);
+    });
+    if (persist) { try { localStorage.setItem('sihaab-lang', lang); } catch (e) {} }
+  }
+
+  document.getElementById('lang-toggle').addEventListener('click', () => {
+    applyLang(currentLang() === 'ar' ? 'en' : 'ar', true);
+  });
+
+  /* ============ theme ============ */
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  function applyTheme(theme, persist) {
+    root.dataset.theme = theme;
+    themeMeta.setAttribute('content', getComputedStyle(root).getPropertyValue('--bg').trim());
+    // Only an explicit toggle becomes a sticky choice; the system default stays live.
+    if (persist) { try { localStorage.setItem('sihaab-theme', theme); } catch (e) {} }
+  }
+  applyTheme(root.dataset.theme, false); // sync meta with the pre-paint choice
+  document.getElementById('theme-toggle').addEventListener('click', () => {
+    applyTheme(root.dataset.theme === 'light' ? 'dark' : 'light', true);
+  });
+
+  // Make I18N the single source of truth for the visible copy in both languages.
+  applyLang(currentLang());
+
+  /* ============ one orchestrated moment: the desktop connects ============ */
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const termLines = ['$ python train.py', 'epoch 3/10  loss 0.214', 'gpu: A10G · 24 GB'];
+  const termEl = document.getElementById('term-text');
+  const latencyEl = document.getElementById('latency-ms');
+  const TARGET_MS = 38, START_MS = 120;
+
+  function typeTerminal() {
+    let line = 0, ch = 0;
+    termEl.textContent = '';
+    (function tick() {
+      const target = termLines[line];
+      if (ch < target.length) {
+        termEl.textContent += target[ch++];
+        setTimeout(tick, 26);
+      } else if (line < termLines.length - 1) {
+        termEl.textContent += '\n';
+        line++; ch = 0;
+        setTimeout(tick, 320);
+      }
+    })();
+  }
+
+  function settleLatency() {
+    let ms = START_MS;
+    (function step() {
+      ms = Math.max(TARGET_MS, ms - (7 + Math.floor(Math.random() * 9)));
+      latencyEl.textContent = ms;
+      if (ms > TARGET_MS) setTimeout(step, 90);
+    })();
+  }
+
+  addEventListener('load', () => {
+    document.body.classList.add('connected');
+    if (!reduceMotion) {
+      latencyEl.textContent = START_MS; // counts down while the connect overlay fades
+      setTimeout(typeTerminal, 1500);
+      setTimeout(settleLatency, 1400);
+    }
+  });
+
+  /* ============ scroll reveals ============ */
+  // The hidden state is gated on html.js, added here so a script failure above
+  // can never leave the page blank below the fold.
+  const ioEls = document.querySelectorAll('.io');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    ioEls.forEach(el => el.classList.add('in'));
+  } else {
+    root.classList.add('js');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    ioEls.forEach(el => io.observe(el));
+  }
+
+  /* ============ waitlist: compose an email (static site, no backend) ============ */
   document.getElementById('wl-form').addEventListener('submit', (e) => {
     e.preventDefault();
+    const lang = currentLang();
     const email = document.getElementById('wl-email').value;
     location.href = 'mailto:hello@sihaab.com?subject=' +
-      encodeURIComponent('Waitlist — Sihaab') +
-      '&body=' + encodeURIComponent('Please add me to the waitlist.\nMy email: ' + email + '\nI am a: (student / university / school / company)');
+      encodeURIComponent(I18N.mailtoSubject[lang]) +
+      '&body=' + encodeURIComponent(I18N.mailtoBody[lang].replace('{email}', () => email));
   });
 </script>
 </body>
