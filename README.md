@@ -35,3 +35,4 @@ Every `git push` to `main` redeploys automatically.
 ## Later
 
 - Replace the mailto waitlist with a real form (Cloudflare Pages Functions + KV, or Tally/Formspark) once volume justifies it.
+- Add a crawlable Arabic entry point (`ar/index.html` generated from the same strings, plus `hreflang` alternates) so Arabic search engines and link unfurls see Arabic content; the JS toggle only serves human visitors.
